@@ -106,13 +106,6 @@ footer {
 }
 
 @media screen and (max-width:510px) {
-   .sidenav {
-    padding-top: 10px;
-   }
-
-  .sidenav a {
-      font-size: 18px;
-    }
 
   header{
        display: inline-flex;
@@ -139,7 +132,6 @@ footer {
     }
 
   .topCases table{
-      margin-left: 9em;
       margin-top: 2em;
     }
 
