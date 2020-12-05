@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cases.css" type="text/css">
+    <title>Covid-19 Information</title>
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="../index.html">Home</a>
+        <a href="cases.html">Country</a>
+        <a href="allCases.html">World metter</a>
+        <a href="about.html">Information</a>
+    </div>
+    <span id="hamburger" style="font-size:30px;cursor:pointer;color:white;margin:20px;" onclick="openNav()">&#9776;</span>
+
+    <div class="main-page">
+        <h1>Covid-19 Live Data</h1>
+        <span id="liveDateTime">
+      <p id="dateTime"></p>
+    </span>
+    <div class="loader"></div>
+        <div id="dropdown" style='text-align:left;'>
+            <div id="dropdown-list">
+                <script type="text/javascript" src="../javascript/countries.js"></script>
+                <select id="country2" name="country2"></select>
+            </div>
+            <button id="runApi">Select</button>
+        </div>
+        <div class="api-details">
+            <div id="content-left">
+                <table>
+                    <tr>
+                        <th>Total cases</th>
+                        <td id="totalCases"></td>
+                    </tr>
+                    <tr>
+                        <th>Total deaths</th>
+                        <td id="totalDeaths"></td>
+                    </tr>
+                    <tr>
+                        <th>Active cases</th>
+                        <td id="activeCases"></td>
+                    </tr>
+                    <tr>
+                        <th>Today cases</th>
+                        <td id="casesToday"></td>
+                    </tr>
+                    <tr>
+                        <th>Today deaths</th>
+                        <td id="deathsToday"></td>
+                    </tr>
+                    <tr>
+                        <th>Recovered</th>
+                        <td id="recovered"></td>
+                    </tr>
+                    <tr>
+                        <th>Tests</th>
+                        <td id="tests"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="content-right">
+                <p id="info">
+                    <strong>The COVID-19 pandemic, also known as the coronavirus pandemic, 
+                        <br> is an ongoing pandemic of coronavirus disease 2019 (COVID‑19),
+                        <br> caused by severe acute respiratory syndrome coronavirus 2 (SARS‑CoV‑2).
+                        <br> The outbreak was first identified in Wuhan, China, in
+                        <br> December 2019. The World Health Organization declared the outbreak
+                        <br> a public health emergency of international concern on 30 January, 
+                        <br> and a pandemic on 11 March. As of 27 May 2020, more than 5.61 
+                        <br>million cases of COVID-19 have been
+                        <br> reported in more than 188 countries and territories, resulting 
+                        <br>in more than 350,000 deaths. More than 5 million people have 
+                        <br> recovered from the virus.
+                    <br> <br></strong> 
+                           You can find the latest information about each country`s
+                           <br>cases by selecting the country you want in  the drop down above the table.
+                </p>
+                <!-- <div id="tests"></div> -->
+                <div id="flag"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer">
+        <div class="row page-bottom footer-text">
+            <div class="col-12 text-center hover-underline">
+                <p id="copyrights">www.worldpandemicnews.netlify.app || 2020</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+<script language="javascript">
+    // populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
+    // populateCountries("country2");
+    populateCountries("country2");
+</script>
+<!-- <script src="../javascript/countries.js" type="text/javascript"></script> -->
+<script src="../javascript/dateTime.js" type="text/javascript"></script>
+<script src="../javascript/index.js" type="text/javascript"></script>
+<script src="../javascript/navBarAnimation.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</html>

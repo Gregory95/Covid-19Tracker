@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>World Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/allCases.css" type="text/css">
+    <!-- Automatically refresh the page to update the API repsonse data -->
+    <script type="text/JavaScript">
+        function AutoRefresh( t ) { setTimeout("location.reload(true);", t); }
+    </script>
+</head>
+
+<body onload="JavaScript:AutoRefresh(45000);">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="../index.html">Home</a>
+        <a href="cases.html">Country</a>
+        <a href="allCases.html">World metter</a>
+        <a href="about.html">Information</a>
+    </div>
+    <span id="hamburger" style="font-size:30px;cursor:pointer;color:white;margin:20px;" onclick="openNav()">&#9776;</span>
+
+    <div class="container">
+        <h1>World Covid-19 Cases</h1>
+        <span id="liveDateTime">
+            <p id="dateTime"></p>
+          </span>
+
+          <div id="downtimeCounter">
+            <p>Auto refresh in:</p>
+            <progress value="0" max="45" id="progressBar"></progress>
+              <script>
+                var timeleft = 45;
+                var downloadTimer = setInterval(function(){
+                  if(timeleft <= 0){
+                    clearInterval(downloadTimer);
+                  }
+                  document.getElementById("progressBar").value = 45 - timeleft;
+                  timeleft -= 1;
+                }, 1000);</script>
+          </div>
+
+        <div class="continents">
+            <div class="loader"></div>
+            <div class="tab">
+                <button id="btn1" class="tablinks" onclick="openContinent(event, 'Europe')">Europe</button>
+                <button id="btn2" class="tablinks" onclick="openContinent(event, 'Asia')">Asia</button>
+                <button id="btn3" class="tablinks" onclick="openContinent(event, 'America')">America</button>
+                <button id="btn4" class="tablinks" onclick="openContinent(event, 'Africa')">Africa</button>
+                <button id="btn5" class="tablinks" onclick="openContinent(event, 'Other')">Other</button>
+            </div>
+
+            <div id="Europe" class="tabcontent">
+                <div>
+                   <h3>Europe</h3>
+                </div>
+                <table id="myTable1">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <!-- <th>Continent</th> -->
+                            <th>Total Cases</th>
+                            <th>Total deaths</th>
+                            <th>Critical</th>
+                            <th>Active Cases</th>
+                            <th>Today Cases</th>
+                            <th>Today Deaths</th>
+                            <th>Recovered</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody id="europe">
+                    </tbody>
+                </table>
+            </div>
+            <div id="Asia" class="tabcontent">
+                <h3>Asia</h3>
+                <table id="myTable2">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <!-- <th>Continent</th> -->
+                            <th>Total Cases</th>
+                            <th>Total deaths</th>
+                            <th>Critical</th>
+                            <th>Active Cases</th>
+                            <th>Today Cases</th>
+                            <th>Today Deaths</th>
+                            <th>Recovered</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody id="asia">
+                    </tbody>
+                </table>
+            </div>
+            <div id="America" class="tabcontent">
+                <div>
+                <h3>America</h3>
+                </div>
+                <table id="myTable3">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <!-- <th>Continent</th> -->
+                            <th>Total Cases</th>
+                            <th>Total deaths</th>
+                            <th>Critical</th>
+                            <th>Active Cases</th>
+                            <th>Today Cases</th>
+                            <th>Today Deaths</th>
+                            <th>Recovered</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody id="america">
+                    </tbody>
+                </table>
+            </div>
+            <div id="Africa" class="tabcontent">
+                <h3>Africa</h3>
+                <table id="myTable4">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <!-- <th>Continent</th> -->
+                            <th>Total Cases</th>
+                            <th>Total deaths</th>
+                            <th>Critical</th>
+                            <th>Active Cases</th>
+                            <th>Today Cases</th>
+                            <th>Today Deaths</th>
+                            <th>Recovered</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody id="africa">
+                    </tbody>
+                </table>
+            </div>
+            <div id="Other" class="tabcontent">
+                <h3>Other</h3>
+                <table id="myTable5">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <!-- <th>Continent</th> -->
+                            <th>Total Cases</th>
+                            <th>Total deaths</th>
+                            <th>Critical</th>
+                            <th>Active Cases</th>
+                            <th>Today Cases</th>
+                            <th>Today Deaths</th>
+                            <th>Recovered</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody id="other">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="description-content">
+        <p>
+            
+        </p>
+    </div>
+
+    <footer class="footer">
+        <div class="row page-bottom footer-text">
+            <div class="col-12 text-center hover-underline">
+                <p id="copyrights">www.worldpandemicnews.netlify.app || 2020</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    function openContinent(evt, continentName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            // console.log(tablinks);
+        }
+        document.getElementById(continentName).style.display = "block";
+        // console.log(continentName);
+        evt.currentTarget.className += " active";
+    }
+</script>
+<script type="text/javascript" src="../javascript/dateTime.js"></script>
+<script type="text/javascript" src="../javascript/getAllCountries.js"></script>
+<script type="text/javascript" src="../javascript/navBarAnimation.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</html>

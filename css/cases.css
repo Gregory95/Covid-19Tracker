@@ -1,0 +1,330 @@
+body {
+    background-image: url("../images/worldMap.webp");
+    background-image: no-repeat;
+    color: white;
+    font-family: "Lato", sans-serif;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 10px;
+    height: 10px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+    display: none;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: orange;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.main-page {
+    margin-top: 10px;
+}
+
+.main-page h1 {
+    text-align: center;
+}
+
+#liveDateTime {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    margin-left: 90px;
+}
+
+#liveDateTime p {
+    text-align: center;
+    font-weight: 700;
+}
+
+#dateTime {
+    color: white;
+    font-size: 15px;
+    padding-right: 85px;
+}
+
+#country_label {
+    font-size: 20px;
+}
+
+#dropdown {
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 2rem;
+}
+
+#dropdown:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+#country2 {
+    border-radius: 4px;
+    background: #229bdc url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+    color: white;
+    width: 400px;
+    padding: 17px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#country2:hover {
+    transition: 0.3s;
+    color: black;
+    background: #dce0f1 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+}
+
+#country2:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+#runApi {
+    border-radius: 10px;
+    background: #229bdc url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+    color: #fff;
+    width: 100px;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 13px;
+    margin-left: 0rem;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+#runApi:hover {
+    transition: 0.2s;
+    color: black;
+    background: #dce0f1 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+}
+
+#runApi:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+#content-left {
+    float: left;
+    width: 50%;
+    margin-left: 20px;
+
+}
+
+#content-right{
+    float: right;
+    width: 35%;
+    margin-right: 10px;
+    margin-top: 50px;
+}
+
+table {
+    margin-top: 50px;
+    width: 70%;
+    padding: 5px;
+    background-color: white;
+    color: black;
+}
+
+th {
+    text-align: left;
+    padding: 15px;
+    color: black;
+
+}
+
+td {
+    text-align: left;
+    padding: 15px;
+    font-weight: 500;
+
+}
+
+tr:nth-child(even) {
+    background-color: #f0f5f5;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+#casesToday{
+    color: orange;
+    font-weight: 650;
+}
+
+#deathsToday {
+    color: red;
+    font-weight: 650;
+}
+
+#recovered {
+    color: green;
+    font-weight: 650;
+}
+
+#stats {
+    border-collapse: collapse;
+    width: 100%;
+    margin-right: 10px;
+}
+
+#flag {
+    text-align: center;
+    height: 100;
+    padding: 20px;
+
+}
+
+/* #tests {
+    font-size: 25px;
+    padding: 20px;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    background-color: white;
+} */
+
+#info {
+    text-align: center;
+    display: none;
+    background-color: rgba(241, 241, 241, 0.651);
+    color: black;
+    padding: 10px;
+    word-wrap: break-word;
+    margin-right: 3em;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: #111;
+    font-size: 12px;
+    opacity: 0.9;
+    text-align: center;
+    clear: both;
+}
+
+
+
+@media screen and (max-width: 1400px) {
+
+    #dropdown{
+        margin-left: 29em;
+    }
+
+    #info{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 918px) {
+
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    #dropdown{
+        margin-top: 5em;
+        margin-left: 1em;
+        width: 300px;
+    }
+
+    #country2{
+        width: 300px;
+    }
+
+    #runApi{
+        margin-left: 0em;
+        margin-top: 10px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+
+    #info{
+        display: none;
+    }
+
+    #content-left{
+        width: 85%;
+    }
+
+    table{
+        width: 100%;
+    }
+
+    #content-right{
+        float: left;
+    }
+
+    #flag {
+      margin-bottom: 100px;
+      margin-left: 1em;
+    }    
+
+    footer{
+        font-size: 12px;
+        margin-top: 50px;
+    }
+        
+}

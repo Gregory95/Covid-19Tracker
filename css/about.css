@@ -1,0 +1,107 @@
+body {
+    background-color: rgb(2, 26, 48);
+    color: white;
+    font-family: "Lato", sans-serif;
+    opacity: 0.9;
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    display: 
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: orange;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.container {
+    margin-bottom: 100px;
+    width:100%
+}
+
+.container h1 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: 28px;
+}
+
+.fa{
+    display: none;
+}
+
+h4{
+    color: rgb(40, 107, 207);
+}
+
+#question{
+    margin-top: 40px;
+    margin-left: 5rem;
+}
+
+#answer{
+    font-size: 16px;
+    color: black(138, 188, 252);
+    width: 80%;
+    margin-left: 5rem;
+}
+/* 
+#answer > li{
+    display: none;
+} */
+
+/* iframe{
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+    width: 50%;
+} */
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: #111;
+    font-size: 12px;
+    opacity: 0.9;
+    text-align: center;
+    clear: both;
+}
+
+@media screen and (max-width: 910px) {
+
+    body{
+        width: 100%;
+    }
+
+}
