@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/worldMap.webp");
+    background-image: url("../images/worldMap.jpeg");
     background-image: no-repeat;
     color: white;
     font-family: "Lato", sans-serif;
@@ -78,6 +78,7 @@ body {
 
 .main-page h1 {
     text-align: center;
+    color: white;
 }
 
 #liveDateTime {
@@ -195,14 +196,6 @@ td {
 
 }
 
-tr:nth-child(even) {
-    background-color: #f0f5f5;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
 #casesToday{
     color: orange;
     font-weight: 650;
@@ -257,7 +250,7 @@ footer {
     width: 100%;
     color: white;
     background-color: #111;
-    font-size: 12px;
+    font-size: 16px;
     opacity: 0.9;
     text-align: center;
     clear: both;

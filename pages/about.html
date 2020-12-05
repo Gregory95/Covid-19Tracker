@@ -4,10 +4,12 @@
         <meta charset="UTF-8">
         <title>About Covid-19</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
         <link rel="stylesheet" href="../css/about.css" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <!-- Automatically refresh the page to update the API repsonse data -->
         <script type="text/JavaScript">
             function AutoRefresh( t ) { setTimeout("location.reload(true);", t); }
@@ -15,14 +17,27 @@
     </head>
 
     <body onload="JavaScript:AutoRefresh(55000);">
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="../index.html">Home</a>
-            <a href="cases.html">Country</a>
-            <a href="allCases.html">World metter</a>
-            <a href="about.html">Information</a>
-        </div>
-        <span id="hamburger" style="font-size:30px;cursor:pointer;color:white;margin:20px;" onclick="openNav()">&#9776;</span>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="../index.html">Covid19 Tracker</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/allCases.html">World Metter <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/cases.html">Single Country Data</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/about.html">Information</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        </header>
 
 
         <div class="container">
@@ -97,7 +112,7 @@
         <footer class="footer">
             <div class="row page-bottom footer-text">
                 <div class="col-12 text-center hover-underline">
-                    <p id="copyrights">www.worldpandemicnews.netlify.app || 2020</p>
+                    <p id="copyrights">www.covidcases.netlify.app || 2020</p>
                 </div>
             </div>
         </footer>
