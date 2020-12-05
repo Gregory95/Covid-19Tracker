@@ -36,7 +36,8 @@ header {
 .topCases{
   display: block;
   float: left;
-  width: 30%;
+  width: 20%;
+  left: 0;
 }
 
 .topCases h2{
