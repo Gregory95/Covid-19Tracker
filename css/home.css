@@ -6,7 +6,8 @@ body {
     background-color: rgb(5, 15, 48);
     font-family: "Lato", sans-serif;
     height: 100%;
-    overflow: hidden;
+    overflow-y: hidden; 
+    overflow-x: hidden; 
 }
 
 header {
