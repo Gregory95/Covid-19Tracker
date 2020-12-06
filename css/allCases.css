@@ -27,18 +27,14 @@ body {
     display: none;
   }
 
-.container {
-    margin-bottom: 100px;
-}
-
 .container h1 {
     text-align: center;
     color: white;
+    margin-top:100px;
 }
 
 #liveDateTime {
     display: block;
-    margin-top: 30px;
 }
 
 #liveDateTime p {
@@ -47,10 +43,10 @@ body {
 }
 
 .continents {
-    margin-top: 50px;
+    margin-top: 25px;
     width: 100%;
-    left: 5%;
-    right: 5%;
+    left: 2%;
+    right: 2%;
 }
 
 
@@ -62,7 +58,6 @@ body {
     background-color: #061301;
     width: 100%;
 }
-
 
 /* Style the buttons inside the tab */
 
@@ -106,7 +101,7 @@ body {
 }
 
 table {
-    margin-top: 50px;
+    margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
     border: 2px solid rgb(0, 12, 5);
@@ -167,13 +162,6 @@ footer {
 
 
 @media screen and (max-width: 910px) {
-    .sidenav {
-        padding-top: 15px;
-    }
-
-    .sidenav a {
-        font-size: 18px;
-    }
 
     .continents h3{
         font-size: 22px;

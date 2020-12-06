@@ -20,14 +20,12 @@ document.getElementById("runApi").onclick = function setup() {
     createRequest()
 };
 
-var infoContent = document.getElementById("info").innerHTML;
 
 //a function that returns information of covid-19 for a specific country that a user chooses.
 function createRequest() {
 
     document.getElementById("tests").style.display = "none";
     document.getElementById("flag").style.display = "none";
-    document.getElementById("info").style.display = "none";
     let request = new XMLHttpRequest();
     let country = document.getElementById("country2").value;
     var img_url = new Image();
@@ -37,13 +35,10 @@ function createRequest() {
         request.open("GET", base_endpoint + getSingleCountry + country);
     }
     request.send();
-    $('.loader').show();
     request.onload = () => {
         if (request.status === 200) {
             document.getElementById("tests").style.display = "block";
             document.getElementById("flag").style.display = "block";
-            document.getElementById("info").style.display = "none";
-            $('.loader').hide();
             // console.log(JSON.parse(request.response));
             let totalCases = document.getElementById("totalCases").innerHTML = (JSON.parse(request.response).cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             let totalDeaths = document.getElementById("totalDeaths").innerHTML = (JSON.parse(request.response).deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -69,25 +64,19 @@ function createRequest() {
                 document.getElementById("img_flag").src = img_url.src;
                 // document.getElementById("tests").innerHTML = tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " tests.";
             }
-            document.getElementById("info").innerHTML = "";
-
             counter++;
         } else {
             if (country === '-1') {
                 clearTheTable();
                 // img_url.src = "";
                 // document.getElementById("img_flag").src = img_url.src;
-                $('.loader').hide();
                 alert(request.status = "\n" + "Please select a country!");
-                document.getElementById("info").style.display = "block";
             }else {
                 // console.log(`error ${request.status} ${request.statusText}`);
                 clearTheTable();
                 // img_url.src = "";
                 // document.getElementById("img_flag").src = img_url.src;
                 alert(request.status + "\n" + "Information about " + country + " not found");
-                $('.loader').hide();
-                document.getElementById("info").style.display = "block";
             }
         }
     }
@@ -102,6 +91,4 @@ function clearTheTable() {
     document.getElementById("deathsToday").innerHTML = "";
     document.getElementById("casesToday").innerHTML = "";
     document.getElementById("tests").innerHTML = "";
-    document.getElementById("info").innerHTML = infoContent;
-
 }

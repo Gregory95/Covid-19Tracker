@@ -5,75 +5,8 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 10px;
-    height: 10px;
-    -webkit-animation: spin 2s linear infinite;
-    /* Safari */
-    animation: spin 2s linear infinite;
-    display: none;
-}
-
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: orange;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
 .main-page {
-    margin-top: 10px;
+    margin-top: 100px;
 }
 
 .main-page h1 {
@@ -164,7 +97,6 @@ body {
     float: left;
     width: 50%;
     margin-left: 20px;
-
 }
 
 #content-right{
@@ -186,14 +118,12 @@ th {
     text-align: left;
     padding: 15px;
     color: black;
-
 }
 
 td {
     text-align: left;
     padding: 15px;
     font-weight: 500;
-
 }
 
 #casesToday{
@@ -224,25 +154,6 @@ td {
 
 }
 
-/* #tests {
-    font-size: 25px;
-    padding: 20px;
-    color: black;
-    text-align: center;
-    font-weight: 500;
-    background-color: white;
-} */
-
-#info {
-    text-align: center;
-    display: none;
-    background-color: rgba(241, 241, 241, 0.651);
-    color: black;
-    padding: 10px;
-    word-wrap: break-word;
-    margin-right: 3em;
-}
-
 footer {
     position: fixed;
     bottom: 0;
@@ -263,17 +174,9 @@ footer {
     #dropdown{
         margin-left: 29em;
     }
-
-    #info{
-        display: none;
-    }
 }
 
 @media screen and (max-width: 918px) {
-
-    .sidenav {
-        padding-top: 15px;
-    }
 
     #dropdown{
         margin-top: 5em;
@@ -288,14 +191,6 @@ footer {
     #runApi{
         margin-left: 0em;
         margin-top: 10px;
-    }
-
-    .sidenav a {
-        font-size: 18px;
-    }
-
-    #info{
-        display: none;
     }
 
     #content-left{
