@@ -1,6 +1,8 @@
 
 const base_endpoint = 'https://corona.lmao.ninja/';
 var getAllCountries = 'v2/countries?sort='; //sort query parameter -> desc or asc
+var getContinents = 'v2/continents';
+var getAllData = 'v2/all';
 
 let max = 0;
 let j = 0;
@@ -15,13 +17,31 @@ var homeCasesObj = {
 };
 var newObj = {};
 let maxCasesArray = [];
-let request = new XMLHttpRequest();
+var globalCases = 0;
 
-
+getContinentsData();
+getGlobalData();
 createRequest();
 
 
+function getGlobalData() {
+    let request = new XMLHttpRequest();
+
+    request.open("GET", base_endpoint + getAllData);
+    request.send();
+    request.onload = () => {
+        let result = JSON.parse(request.response);
+        if (request.status === 200) {
+            document.getElementById("worldCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            alert(request.status + "\n" + "System error");
+        }
+    }
+}
+
 function createRequest() {
+    let request = new XMLHttpRequest();
+
     request.open("GET", base_endpoint + getAllCountries + "desc");
     request.send();
     request.onload = () => {
@@ -60,6 +80,59 @@ function createRequest() {
         } else {
             alert(request.status + "\n" + "System error");
             // console.log(`error ${request.status} ${request.statusText}`);
+        }
+    }
+}
+
+
+function getContinentsData() {
+    let request = new XMLHttpRequest();
+
+    var europeCases;
+    var asiaCases;
+    var americaCases = 0;
+    var africaCases;
+    
+    request.open("GET", base_endpoint + getContinents);
+    request.send();
+    request.onload = () => {
+        if (request.status === 200) {
+            let result = JSON.parse(request.response);
+            
+            for (var i = 0; i < result.length; i++)
+            {
+                if (result[i].continent === "Europe")
+                {
+                    europeCases = result[i].cases;
+                }
+                if (result[i].continent === "Asia")
+                {
+                    asiaCases = result[i].cases;
+                }
+                if (result[i].continent === "North America")
+                {
+                    americaCases += result[i].cases;
+                }
+                if (result[i].continent === "South America")
+                {
+                    americaCases += result[i].cases;
+                }
+                if (result[i].continent === "Africa")
+                {
+                    africaCases = result[i].cases;
+                }
+
+                // globalCases = globalCases + result[i].cases;
+            }
+
+            console.log(europeCases);
+            console.log(asiaCases);
+            console.log(americaCases);
+
+            document.getElementById("europeCases").innerHTML = europeCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("asiaCases").innerHTML = asiaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("americaCases").innerHTML = americaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("africaCases").innerHTML = africaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     }
 }
