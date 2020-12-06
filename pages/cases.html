@@ -20,7 +20,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="../css/cases.css" rel="stylesheet">
+  <link href="../assets/css/cases.css" rel="stylesheet">
 
 </head>
 
@@ -54,7 +54,7 @@
     <div class="loader"></div>
         <div id="dropdown" style='text-align:left;'>
             <div id="dropdown-list">
-                <script type="text/javascript" src="../javascript/countries.js"></script>
+                <script src="../assets/countries.js"></script>
                 <select id="country2" name="country2"></select>
             </div>
             <button id="runApi">Select</button>
@@ -102,9 +102,11 @@
     <div id="preloader"></div>
 </body>
   <!-- Vendor JS Files -->
+
+
   <script src="../assets/vendor/jquery/jquery.min.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src=../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
   <script src="../assets/vendor/waypoints/jquery.waypoints.min.js"></script>
   <script src="../assets/vendor/counterup/counterup.min.js"></script>
@@ -115,10 +117,9 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  
-  <script language="javascript">
+  <script>
     populateCountries("country2");
   </script>
-  <script src="../javascript/dateTime.js"></script>
-  <script src="../javascript/index.js"></script>
+  <script src="../assets/js/dateTime.js"></script>
+  <script src="../assets/js/index.js"></script>
 </html>

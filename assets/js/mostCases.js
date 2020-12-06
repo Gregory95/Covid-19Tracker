@@ -22,7 +22,6 @@ createRequest();
 
 
 function createRequest() {
-
     request.open("GET", base_endpoint + getAllCountries + "desc");
     request.send();
     request.onload = () => {
@@ -36,6 +35,8 @@ function createRequest() {
                     }
                     maxCasesArray.push(homeCasesObj);
             }
+
+            console.log(maxCasesArray);
 
             countryName = document.getElementById("Country1").innerHTML = maxCasesArray[0].name;
             totalCases = document.getElementById("totalCases1").innerHTML = maxCasesArray[0].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
