@@ -31,7 +31,7 @@ body {
     width: 80%;
 }
 
-.container h1 {
+.container-fluid h1 {
     text-align: center;
     color: white;
     margin-top:100px;
@@ -167,9 +167,6 @@ footer {
 
 @media screen and (max-width: 910px) {
 
-    .container-fluid{
-        width: auto;
-    }
     .continents h3{
         font-size: 22px;
     }
