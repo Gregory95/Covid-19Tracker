@@ -27,11 +27,7 @@ body {
     display: none;
   }
 
-.container-fluid{
-    width: 80%;
-}
-
-.container-fluid h1 {
+.container h1 {
     text-align: center;
     color: white;
     margin-top:100px;
