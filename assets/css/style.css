@@ -648,11 +648,6 @@ section {
 # Top cases
 --------------------------------------------------------------*/
 #topCasesSection {
-  width: 80%;
-  margin-left: 5em; 
-  margin-right: auto;
-}
-
-.topCases > #tableHeader{
-  font-size: 18px;
+  width: 100%;
+  padding: 10px;
 }

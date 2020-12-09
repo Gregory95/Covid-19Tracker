@@ -41,13 +41,15 @@ function getGlobalData() {
 
 function createRequest() {
     let request = new XMLHttpRequest();
-
+    var tempArray = [];
+    var topFiveCountriesArray = [];
     request.open("GET", base_endpoint + getAllCountries + "desc");
     request.send();
     request.onload = () => {
         if (request.status === 200) {
             let result = JSON.parse(request.response);
             for (i = 0; i < result.length; i++) {
+                tempArray[i] = result[i].cases;
                     homeCasesObj = {
                         name: result[i].country,
                         number: result[i].cases,
@@ -55,28 +57,44 @@ function createRequest() {
                     }
                     maxCasesArray.push(homeCasesObj);
             }
+            tempArray = tempArray.sort((a, b) => b - a).slice(0, 5);
+            let j = 0;
+            for (i = 0; i < maxCasesArray.length; i++)
+            {
+                if (tempArray[j] === maxCasesArray[i].number)
+                {
+                    homeCasesObj = {
+                        name: maxCasesArray[i].name,
+                        number: maxCasesArray[i].number,
+                        flag: maxCasesArray[i].flag
+                    }
+                    topFiveCountriesArray.push(homeCasesObj);
+                    j++;
+                    i = 0;
+                    if (topFiveCountriesArray.length === 5)
+                        i = 999;
+                }
+            }
 
-            console.log(maxCasesArray);
+            countryName = document.getElementById("Country1").innerHTML = topFiveCountriesArray[0].name;
+            totalCases = document.getElementById("totalCases1").innerHTML = topFiveCountriesArray[0].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            flag = document.getElementById("flag1").src = topFiveCountriesArray[0].flag;
 
-            countryName = document.getElementById("Country1").innerHTML = maxCasesArray[0].name;
-            totalCases = document.getElementById("totalCases1").innerHTML = maxCasesArray[0].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag1").src = maxCasesArray[0].flag;
+            countryName = document.getElementById("Country2").innerHTML = topFiveCountriesArray[1].name;
+            totalCases = document.getElementById("totalCases2").innerHTML = topFiveCountriesArray[1].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            flag = document.getElementById("flag2").src = topFiveCountriesArray[1].flag;
 
-            countryName = document.getElementById("Country2").innerHTML = maxCasesArray[1].name;
-            totalCases = document.getElementById("totalCases2").innerHTML = maxCasesArray[1].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag2").src = maxCasesArray[1].flag;
+            countryName = document.getElementById("Country3").innerHTML = topFiveCountriesArray[2].name;
+            totalCases = document.getElementById("totalCases3").innerHTML = topFiveCountriesArray[2].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            flag = document.getElementById("flag3").src = topFiveCountriesArray[2].flag;
 
-            countryName = document.getElementById("Country3").innerHTML = maxCasesArray[2].name;
-            totalCases = document.getElementById("totalCases3").innerHTML = maxCasesArray[2].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag3").src = maxCasesArray[2].flag;
+            countryName = document.getElementById("Country4").innerHTML = topFiveCountriesArray[3].name;
+            totalCases = document.getElementById("totalCases4").innerHTML = topFiveCountriesArray[3].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            flag = document.getElementById("flag4").src = topFiveCountriesArray[3].flag;
 
-            countryName = document.getElementById("Country4").innerHTML = maxCasesArray[3].name;
-            totalCases = document.getElementById("totalCases4").innerHTML = maxCasesArray[3].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag4").src = maxCasesArray[3].flag;
-
-            countryName = document.getElementById("Country5").innerHTML = maxCasesArray[4].name;
-            totalCases = document.getElementById("totalCases5").innerHTML = maxCasesArray[4].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag5").src = maxCasesArray[4].flag;
+            countryName = document.getElementById("Country5").innerHTML = topFiveCountriesArray[4].name;
+            totalCases = document.getElementById("totalCases5").innerHTML = topFiveCountriesArray[4].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            flag = document.getElementById("flag5").src = topFiveCountriesArray[4].flag;
         } else {
             alert(request.status + "\n" + "System error");
             // console.log(`error ${request.status} ${request.statusText}`);
@@ -124,10 +142,6 @@ function getContinentsData() {
 
                 // globalCases = globalCases + result[i].cases;
             }
-
-            console.log(europeCases);
-            console.log(asiaCases);
-            console.log(americaCases);
 
             document.getElementById("europeCases").innerHTML = europeCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             document.getElementById("asiaCases").innerHTML = asiaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
