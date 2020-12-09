@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../assets/img/images/virus.jpeg" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -31,8 +32,6 @@
     <div class="container d-flex align-items-center">
 
       <h1 class="logo mr-auto"><a href="../index.html">Covid-19 Traker</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
@@ -62,7 +61,6 @@
         <div class="api-details">
             <div id="content-left">
                 <table class="table-light table-bordered">
-                    <caption style="color:white;">Cases table</caption>
                     <tr>
                         <th>Total cases</th>
                         <td id="totalCases"></td>
@@ -91,13 +89,17 @@
                         <th>Tests</th>
                         <td id="tests"></td>
                     </tr>
+                    <tr>
+                      <th>Last updated</th>
+                      <td id="updateTime"></td>
+                    </tr>
                 </table>
             </div>
             <div id="content-right">
                 <div id="flag"></div>
             </div>
         </div>
-    </div>
+      </div>
     </div>
     <div id="preloader"></div>
 

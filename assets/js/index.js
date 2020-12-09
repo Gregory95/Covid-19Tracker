@@ -37,16 +37,27 @@ function createRequest() {
     request.send();
     request.onload = () => {
         if (request.status === 200) {
+            let result = JSON.parse(request.response);
+
+            var d = new Date(result.updated);
+            var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+            var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
+            var minutes = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
+            var formattedTime = hours + ":" + minutes;
+
+            formattedDate = formattedDate + " " + formattedTime;
+
             document.getElementById("tests").style.display = "block";
             document.getElementById("flag").style.display = "block";
             // console.log(JSON.parse(request.response));
-            let totalCases = document.getElementById("totalCases").innerHTML = (JSON.parse(request.response).cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let totalDeaths = document.getElementById("totalDeaths").innerHTML = (JSON.parse(request.response).deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let activeCases = document.getElementById("activeCases").innerHTML = (JSON.parse(request.response).active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let recovered = document.getElementById("recovered").innerHTML = (JSON.parse(request.response).recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let deathsToday = document.getElementById("deathsToday").innerHTML = "+" + (JSON.parse(request.response).todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let casesToday = document.getElementById("casesToday").innerHTML = "+" + (JSON.parse(request.response).todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            let tests = document.getElementById("tests").innerHTML = (JSON.parse(request.response).tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            document.getElementById("totalCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("totalDeaths").innerHTML = result.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("activeCases").innerHTML = result.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("recovered").innerHTML = result.recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("deathsToday").innerHTML = "+" + result.todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("casesToday").innerHTML = "+" + result.todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("tests").innerHTML = result.tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("updateTime").innerHTML = formattedDate;
 
             // document.getElementById("flag").innerHTML += '<img src="'+img_url+'">';
             if (counter < 1) {

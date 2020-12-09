@@ -651,3 +651,9 @@ section {
   width: 100%;
   padding: 10px;
 }
+
+#updateTime {
+  font-size: 14px;
+  margin-left: 2em;
+  margin-bottom: 3em;
+}

@@ -33,6 +33,16 @@ function getGlobalData() {
         let result = JSON.parse(request.response);
         if (request.status === 200) {
             document.getElementById("worldCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            
+            var d = new Date(result.updated);
+            var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+            var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
+            var minutes = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
+            var formattedTime = hours + ":" + minutes;
+
+            formattedDate = formattedDate + " " + formattedTime;
+
+            document.getElementById("lastUpdated").innerHTML = formattedDate;
         } else {
             alert(request.status + "\n" + "System error");
         }
@@ -105,7 +115,6 @@ function createRequest() {
 
 function getContinentsData() {
     let request = new XMLHttpRequest();
-
     var europeCases;
     var asiaCases;
     var americaCases = 0;

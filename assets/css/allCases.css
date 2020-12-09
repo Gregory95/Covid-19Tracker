@@ -167,7 +167,9 @@ footer {
 
 @media screen and (max-width: 910px) {
 
-
+    .container-fluid{
+        width: auto;
+    }
     .continents h3{
         font-size: 22px;
     }
