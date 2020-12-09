@@ -27,6 +27,10 @@ body {
     display: none;
   }
 
+.container-fluid{
+    width: 80%;
+}
+
 .container h1 {
     text-align: center;
     color: white;
@@ -126,7 +130,7 @@ tr:nth-child(even) {
 }
 
 tr {
-    border: 2px solid rgb(3, 71, 31);
+    border: 2px solid rgb(134, 138, 135);
     text-align: left;
 }
 
@@ -162,6 +166,7 @@ footer {
 
 
 @media screen and (max-width: 910px) {
+
 
     .continents h3{
         font-size: 22px;
