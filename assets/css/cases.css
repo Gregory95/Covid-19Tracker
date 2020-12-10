@@ -1,5 +1,5 @@
 body {
-    background-image: url("../img/images/worldMap.jpeg");
+    background-image: url("../img/hero-bg.jpg");
     background-image: no-repeat;
     color: white;
     font-family: "Lato", sans-serif;
@@ -11,7 +11,7 @@ body {
 
 .main-page h1 {
     text-align: center;
-    color: white;
+    color: black;
 }
 
 #liveDateTime {
@@ -27,7 +27,7 @@ body {
 }
 
 #dateTime {
-    color: white;
+    color: black;
     font-size: 15px;
     padding-right: 85px;
 }

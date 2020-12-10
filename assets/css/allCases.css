@@ -1,5 +1,5 @@
 body {
-    background-image: url("../img/images/worldMap.jpeg");
+    background-image: url("../img/hero-bg.jpg");
     background-image: no-repeat;
     color: white;
     font-family: "Lato", sans-serif;
@@ -29,7 +29,7 @@ body {
 
 .container h1 {
     text-align: center;
-    color: white;
+    color: black;
     margin-top:100px;
 }
 

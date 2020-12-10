@@ -1,11 +1,12 @@
 body {
-    background-color: rgb(2, 26, 48);
-    color: white;
+    background-image: url("../img/hero-bg.jpg");
+    background-image: no-repeat;
+    color: black;
     font-family: "Lato", sans-serif;
     opacity: 0.9;
 }
 
-.container h1 {
+.container-fluid h1 {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 500;
