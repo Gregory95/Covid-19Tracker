@@ -11,7 +11,7 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 500;
     font-size: 28px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .fa{
@@ -24,14 +24,14 @@ h4{
 
 #question{
     margin-top: 40px;
-    margin-left: 5rem;
+    margin-left: 2rem;
 }
 
 #answer{
     font-size: 16px;
     color: black(138, 188, 252);
     width: 80%;
-    margin-left: 5rem;
+    margin-left: 2rem;
 }
 
 
