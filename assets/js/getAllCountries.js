@@ -95,29 +95,23 @@ function getEuropeanCountries() {
     $('.loader').show();
     request.onload = () => {
         let result = JSON.parse(request.response);
-        // console.log(JSON.parse(request.response));
-        // console.log(result.length);
+
 
         if (request.status === 200) {
             $('.loader').hide();
             europe_counter = 0;
             for (let k = 0; k < result.length; k++) {
                 if (result[k].continent === "Europe") {
-                    // console.log(result[k].continent);
                     europe_counter++;
                 }
             }
 
 
             generateTableRows(europe_counter, "Europe");
-            // console.log(europe_counter);
             for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, i gives it as Asian country but its not.
+                //API has a mistake on Cyprus, it gives it as Asian country but its not.
                 if (result[i].continent === "Europe" || result[i].country === "Cyprus") {
                     document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    // document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].continent;
-                    // if (result[i].country === "Cyprus")
-                    //     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = "Europe";
                     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -129,10 +123,8 @@ function getEuropeanCountries() {
                     j++;
                 }
             }
-            // console.log(j);
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }
@@ -154,25 +146,20 @@ function getAsianCountries() {
     $('.loader').show();
     request.onload = () => {
         let result = JSON.parse(request.response);
-        // console.log(JSON.parse(request.response));
-        // console.log(result.length);
         if (request.status === 200) {
             $('.loader').hide();
             asia_counter = 0;
             for (let k = 0; k < result.length; k++) {
                 if (result[k].continent === "Asia") {
-                    // console.log(result[k].continent);
                     asia_counter++;
                 }
             }
 
             generateTableRows(asia_counter, "Asia");
-            // console.log(asia_counter);
             for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, i gives it as Asian country but its not.
+                //API has a mistake on Cyprus, it gives it as Asian country but its not.
                 if (result[i].continent === "Asia" && result[i].country != "Cyprus") {
                     document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    // document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].continent;
                     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -184,10 +171,8 @@ function getAsianCountries() {
                     j++;
                 }
             }
-            // console.log(j);
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }
@@ -210,26 +195,20 @@ function getAmericaCountries() {
     $('.loader').show();
     request.onload = () => {
         let result = JSON.parse(request.response);
-        // console.log(JSON.parse(request.response));
-        // console.log(result.length);
         if (request.status === 200) {
             $('.loader').hide();
             america_counter = 0;
             for (let k = 0; k < result.length; k++) {
                 if (result[k].continent === "North America" || result[k].continent === "South America") {
-                    // console.log(result[k].continent);
                     america_counter++;
                 }
             }
 
 
             generateTableRows(america_counter, "America");
-            // console.log(america_counter);
             for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, i gives it as Asian country but its not.
                 if (result[i].continent === "North America" || result[i].continent === "South America") {
                     document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    // document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].continent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -241,11 +220,8 @@ function getAmericaCountries() {
                     j++;
                 }
             }
-            // console.log(j);
-            // console.log(i);
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }
@@ -267,26 +243,20 @@ function getAfticanCountries() {
     $('.loader').show();
     request.onload = () => {
         let result = JSON.parse(request.response);
-        // console.log(JSON.parse(request.response));
-        // console.log(result.length);
         if (request.status === 200) {
             $('.loader').hide();
             africa_counter = 0;
             for (let k = 0; k < result.length; k++) {
                 if (result[k].continent === "Africa") {
-                    // console.log(result[k].continent);
                     africa_counter++;
                 }
             }
 
 
             generateTableRows(africa_counter, "Africa");
-            // console.log(africa_counter);
             for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, i gives it as Asian country but its not.
                 if (result[i].continent === "Africa") {
                     document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    // document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].continent;
                     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -298,12 +268,9 @@ function getAfticanCountries() {
                     j++;
                 }
             }
-            // console.log(j);
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
-        // console.log(i);
     }
 }
 
@@ -325,26 +292,20 @@ function getOtherCountries() {
     $('.loader').show();
     request.onload = () => {
         let result = JSON.parse(request.response);
-        // console.log(JSON.parse(request.response));
-        // console.log(result.length);
         if (request.status === 200) {
             $('.loader').hide();
             other_counter = 0;
             for (let k = 0; k < result.length; k++) {
                 if (result[k].continent != "Europe" && result[k].continent != "Asia" && result[k].continent != "Africa" && result[k].continent != "North America" && result[k].continent != "South America") {
-                    // console.log(result[k].continent);
                     other_counter++;
                 }
             }
 
 
             generateTableRows(other_counter, "Other");
-            // console.log(other_counter);
             for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, i gives it as Asian country but its not.
                 if (result[i].continent != "Europe" && result[i].continent != "Asia" && result[i].continent != "Africa" && result[i].continent != "North America" && result[i].continent != "South America") {
                     document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    // document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].continent;
                     document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -356,11 +317,8 @@ function getOtherCountries() {
                     j++;
                 }
             }
-            // console.log(i);
-            // console.log(j);
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }

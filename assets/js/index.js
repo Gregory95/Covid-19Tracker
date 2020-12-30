@@ -49,7 +49,6 @@ function createRequest() {
 
             document.getElementById("tests").style.display = "block";
             document.getElementById("flag").style.display = "block";
-            // console.log(JSON.parse(request.response));
             document.getElementById("totalCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             document.getElementById("totalDeaths").innerHTML = result.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             document.getElementById("activeCases").innerHTML = result.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -59,13 +58,11 @@ function createRequest() {
             document.getElementById("tests").innerHTML = result.tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             document.getElementById("updateTime").innerHTML = formattedDate;
 
-            // document.getElementById("flag").innerHTML += '<img src="'+img_url+'">';
             if (counter < 1) {
                 document.getElementById("flag").appendChild(img_url);
             }
 
             if (country === 'All') {
-                // document.getElementById("tests").innerHTML =  tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 img_url.src = "../images/world.png";
                 img_url.setAttribute('id', 'img_flag');
                 document.getElementById("img_flag").src = img_url.src;
@@ -73,20 +70,14 @@ function createRequest() {
                 img_url.src = JSON.parse(request.response).countryInfo.flag;
                 img_url.setAttribute('id', 'img_flag');
                 document.getElementById("img_flag").src = img_url.src;
-                // document.getElementById("tests").innerHTML = tests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " tests.";
             }
             counter++;
         } else {
             if (country === '-1') {
                 clearTheTable();
-                // img_url.src = "";
-                // document.getElementById("img_flag").src = img_url.src;
                 alert(request.status = "\n" + "Please select a country!");
-            }else {
-                // console.log(`error ${request.status} ${request.statusText}`);
+            } else {
                 clearTheTable();
-                // img_url.src = "";
-                // document.getElementById("img_flag").src = img_url.src;
                 alert(request.status + "\n" + "Information about " + country + " not found");
             }
         }

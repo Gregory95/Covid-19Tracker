@@ -33,7 +33,7 @@ function getGlobalData() {
         let result = JSON.parse(request.response);
         if (request.status === 200) {
             document.getElementById("worldCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            
+
             var d = new Date(result.updated);
             var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
             var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
@@ -60,19 +60,17 @@ function createRequest() {
             let result = JSON.parse(request.response);
             for (i = 0; i < result.length; i++) {
                 tempArray[i] = result[i].cases;
-                    homeCasesObj = {
-                        name: result[i].country,
-                        number: result[i].cases,
-                        flag: result[i].countryInfo.flag
-                    }
-                    maxCasesArray.push(homeCasesObj);
+                homeCasesObj = {
+                    name: result[i].country,
+                    number: result[i].cases,
+                    flag: result[i].countryInfo.flag
+                }
+                maxCasesArray.push(homeCasesObj);
             }
             tempArray = tempArray.sort((a, b) => b - a).slice(0, 5);
             let j = 0;
-            for (i = 0; i < maxCasesArray.length; i++)
-            {
-                if (tempArray[j] === maxCasesArray[i].number)
-                {
+            for (i = 0; i < maxCasesArray.length; i++) {
+                if (tempArray[j] === maxCasesArray[i].number) {
                     homeCasesObj = {
                         name: maxCasesArray[i].name,
                         number: maxCasesArray[i].number,
@@ -107,7 +105,6 @@ function createRequest() {
             flag = document.getElementById("flag5").src = topFiveCountriesArray[4].flag;
         } else {
             alert(request.status + "\n" + "System error");
-            // console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }
@@ -119,33 +116,27 @@ function getContinentsData() {
     var asiaCases;
     var americaCases = 0;
     var africaCases;
-    
+
     request.open("GET", base_endpoint + getContinents);
     request.send();
     request.onload = () => {
         if (request.status === 200) {
             let result = JSON.parse(request.response);
-            
-            for (var i = 0; i < result.length; i++)
-            {
-                if (result[i].continent === "Europe")
-                {
+
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].continent === "Europe") {
                     europeCases = result[i].cases;
                 }
-                if (result[i].continent === "Asia")
-                {
+                if (result[i].continent === "Asia") {
                     asiaCases = result[i].cases;
                 }
-                if (result[i].continent === "North America")
-                {
+                if (result[i].continent === "North America") {
                     americaCases += result[i].cases;
                 }
-                if (result[i].continent === "South America")
-                {
+                if (result[i].continent === "South America") {
                     americaCases += result[i].cases;
                 }
-                if (result[i].continent === "Africa")
-                {
+                if (result[i].continent === "Africa") {
                     africaCases = result[i].cases;
                 }
 
