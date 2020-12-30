@@ -40,7 +40,7 @@ body {
 
 .container h1 {
     text-align: center;
-    color: #2487ce;
+    color: #469fdf;
     margin-top: 100px;
 }
 
@@ -51,6 +51,7 @@ body {
 #liveDateTime p {
     text-align: center;
     font-weight: 700;
+    color: #469fdf;
 }
 
 .continents {

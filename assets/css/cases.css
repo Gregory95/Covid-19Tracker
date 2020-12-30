@@ -11,7 +11,7 @@ body {
 
 .main-page h1 {
     text-align: center;
-    color: #2487ce;
+    color: #469fdf
 }
 
 #liveDateTime {
@@ -24,6 +24,7 @@ body {
 #liveDateTime p {
     text-align: center;
     font-weight: 700;
+    color: #469fdf;
 }
 
 #dateTime {
