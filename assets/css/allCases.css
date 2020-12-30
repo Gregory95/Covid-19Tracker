@@ -7,30 +7,41 @@ body {
 
 /* Safari */
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
 
-  .loader {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid #3498db;
     width: 20px;
     height: 20px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
     display: none;
-  }
+}
 
 .container h1 {
     text-align: center;
-    color: black;
-    margin-top:100px;
+    color: #2487ce;
+    margin-top: 100px;
 }
 
 #liveDateTime {
@@ -134,14 +145,18 @@ tr:hover {
     background-color: #ddd;
 }
 
-.continents h3{
+.continents h3 {
     text-align: center;
     font-weight: 700;
     font-size: 32px;
     color: white;
 }
 
-#Europe, #Asia, #America, #Africa, #Other{
+#Europe,
+#Asia,
+#America,
+#Africa,
+#Other {
     background: black;
 }
 
@@ -163,11 +178,11 @@ footer {
 
 @media screen and (max-width: 910px) {
 
-    .continents h3{
+    .continents h3 {
         font-size: 22px;
     }
 
-    .tab{
+    .tab {
         width: 100%;
     }
 
@@ -175,11 +190,11 @@ footer {
         width: 100%;
     }
 
-    .tab button{
+    .tab button {
         font-size: 12px;
     }
 
-    table{
+    table {
         font-size: 14px;
         width: 100%;
     }

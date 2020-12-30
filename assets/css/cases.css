@@ -11,7 +11,7 @@ body {
 
 .main-page h1 {
     text-align: center;
-    color: black;
+    color: #2487ce;
 }
 
 #liveDateTime {
@@ -42,10 +42,10 @@ body {
     margin-left: 2rem;
 }
 
-#dropdown:focus{
+#dropdown:focus {
     outline: none;
     box-shadow: none;
-  }
+}
 
 #country2 {
     border-radius: 4px;
@@ -64,10 +64,10 @@ body {
     background: #dce0f1 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
 }
 
-#country2:focus{
+#country2:focus {
     outline: none;
     box-shadow: none;
-  }
+}
 
 #runApi {
     border-radius: 10px;
@@ -88,9 +88,9 @@ body {
     background: #dce0f1 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
 }
 
-#runApi:focus{
-  outline: none;
-  box-shadow: none;
+#runApi:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 #content-left {
@@ -99,7 +99,7 @@ body {
     margin-left: 20px;
 }
 
-#content-right{
+#content-right {
     float: right;
     width: 35%;
     margin-right: 10px;
@@ -126,7 +126,7 @@ td {
     font-weight: 500;
 }
 
-#casesToday{
+#casesToday {
     color: orange;
     font-weight: 650;
 }
@@ -170,48 +170,48 @@ footer {
 
 @media screen and (max-width: 1400px) {
 
-    #dropdown{
+    #dropdown {
         margin-left: 29em;
     }
 }
 
 @media screen and (max-width: 918px) {
 
-    #dropdown{
+    #dropdown {
         margin-top: 5em;
         margin-left: 1em;
         width: 300px;
     }
 
-    #country2{
+    #country2 {
         width: 300px;
     }
 
-    #runApi{
+    #runApi {
         margin-left: 0em;
         margin-top: 10px;
     }
 
-    #content-left{
+    #content-left {
         width: 85%;
     }
 
-    table{
+    table {
         width: 100%;
     }
 
-    #content-right{
+    #content-right {
         float: left;
     }
 
     #flag {
-      margin-bottom: 100px;
-      margin-left: 1em;
-    }    
+        margin-bottom: 100px;
+        margin-left: 1em;
+    }
 
-    footer{
+    footer {
         font-size: 12px;
         margin-top: 50px;
     }
-        
+
 }

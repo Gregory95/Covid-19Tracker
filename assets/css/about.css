@@ -12,22 +12,23 @@ body {
     font-weight: 500;
     font-size: 28px;
     margin-top: 90px;
+    color: #2487ce;
 }
 
-.fa{
+.fa {
     display: none;
 }
 
-h4{
+h4 {
     color: rgb(40, 107, 207);
 }
 
-#question{
+#question {
     margin-top: 40px;
     margin-left: 2rem;
 }
 
-#answer{
+#answer {
     font-size: 16px;
     color: black(138, 188, 252);
     width: 80%;
@@ -50,7 +51,7 @@ footer {
 
 @media screen and (max-width: 910px) {
 
-    body{
+    body {
         width: 100%;
     }
 
