@@ -1,152 +1,142 @@
+const baseEndpoint = "https://corona.lmao.ninja";
+const allCountriesEndpoint = "v2/countries?sort="; //sort query parameter -> desc or asc
+const continentsEndpoint = "v2/continents";
+const allDataEndpoint = "v2/all";
 
-const base_endpoint = 'https://corona.lmao.ninja/';
-var getAllCountries = 'v2/countries?sort='; //sort query parameter -> desc or asc
-var getContinents = 'v2/continents';
-var getAllData = 'v2/all';
-
-let max = 0;
-let j = 0;
-let i = 0;
-let totalCases;
-let countryName;
-let flag;
-var homeCasesObj = {
-    name: "",
-    number: 0,
-    flag: ""
+window.onload = () => {
+    getGlobalData();
+    dataPerContinent();
+    dataPerTopCountries();
 };
-var newObj = {};
-let maxCasesArray = [];
-var globalCases = 0;
 
-getContinentsData();
-getGlobalData();
-createRequest();
+const getGlobalData = () => {
+    const url = `${baseEndpoint}/${allDataEndpoint}`;
 
-
-function getGlobalData() {
-    let request = new XMLHttpRequest();
-
-    request.open("GET", base_endpoint + getAllData);
-    request.send();
-    request.onload = () => {
-        let result = JSON.parse(request.response);
-        if (request.status === 200) {
-            document.getElementById("worldCases").innerHTML = result.cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            var d = new Date(result.updated);
-            var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
-            var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
-            var minutes = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
-            var formattedTime = hours + ":" + minutes;
-
-            formattedDate = formattedDate + " " + formattedTime;
-
-            document.getElementById("lastUpdated").innerHTML = formattedDate;
-        } else {
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.errr(err);
             alert(request.status + "\n" + "System error");
+        })
+        .then((result) => {
+            if (document.getElementById("worldCases")) {
+                document.getElementById(
+                    "worldCases"
+                ).innerHTML = result.cases.toLocaleString();
+                document.getElementById(
+                    "lastUpdated"
+                ).innerHTML = convertLastUpdatedToNormalizedDate(
+                    result.updated
+                );
+            }
+        });
+};
+
+const dataPerTopCountries = () => {
+    const url = `${baseEndpoint}/${allCountriesEndpoint}desc`;
+
+    // use fetch, xmlhttprequest is ancient
+    fetch(url)
+        .then((response) => response.json())
+        .then((results) => {
+            const countriesWithMostCases = getCountriesWithMostCases(
+                results,
+                5
+            ); // top 5
+            addCountriesWithMostCasesToHtml(countriesWithMostCases);
+        });
+};
+
+const updateCasesPerContinentView = (results) => {
+    const continentMapper = {
+        America: "americaCases",
+        Africa: "africaCases",
+        Europe: "europeCases",
+        Asia: "asiaCases",
+    };
+
+    const isAmerica = (result) =>
+        ["North America", "South America"].includes(result.continent);
+
+    // north and south america should be 1 number, sum up their cases
+    const americaCases = results
+        .filter((result) => isAmerica(result))
+        .map((result) => result.cases)
+        .reduce((a, b) => a + b);
+
+    // remove south/north america
+    let filteredResults = results.filter((r) => !isAmerica(r));
+
+    // and add a new "entry" to the results, so we can use the mapping technique consistently
+    // without hacky if checks and so on
+    filteredResults.push({
+        cases: americaCases,
+        continent: "America",
+    });
+
+    // update the dom
+    // oceania is missing, this must be wrong though
+    for (const result of filteredResults) {
+        const divId = continentMapper[result.continent];
+
+        if (document.getElementById(divId)) {
+            // make the assignments only if the item exists in dom
+            document.getElementById(
+                divId
+            ).innerHTML = result.cases.toLocaleString();
         }
     }
-}
+};
 
-function createRequest() {
-    let request = new XMLHttpRequest();
-    var tempArray = [];
-    var topFiveCountriesArray = [];
-    request.open("GET", base_endpoint + getAllCountries + "desc");
-    request.send();
-    request.onload = () => {
-        if (request.status === 200) {
-            let result = JSON.parse(request.response);
-            for (i = 0; i < result.length; i++) {
-                tempArray[i] = result[i].cases;
-                homeCasesObj = {
-                    name: result[i].country,
-                    number: result[i].cases,
-                    flag: result[i].countryInfo.flag
-                }
-                maxCasesArray.push(homeCasesObj);
-            }
-            tempArray = tempArray.sort((a, b) => b - a).slice(0, 5);
-            let j = 0;
-            for (i = 0; i < maxCasesArray.length; i++) {
-                if (tempArray[j] === maxCasesArray[i].number) {
-                    homeCasesObj = {
-                        name: maxCasesArray[i].name,
-                        number: maxCasesArray[i].number,
-                        flag: maxCasesArray[i].flag
-                    }
-                    topFiveCountriesArray.push(homeCasesObj);
-                    j++;
-                    i = 0;
-                    if (topFiveCountriesArray.length === 5)
-                        i = 999;
-                }
-            }
+const dataPerContinent = () => {
+    const url = `${baseEndpoint}/${continentsEndpoint}`;
 
-            countryName = document.getElementById("Country1").innerHTML = topFiveCountriesArray[0].name;
-            totalCases = document.getElementById("totalCases1").innerHTML = topFiveCountriesArray[0].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag1").src = topFiveCountriesArray[0].flag;
+    fetch(url)
+        .then((response) => response.json())
+        .then((results) => {
+            updateCasesPerContinentView(results);
+        })
+        .catch((err) => {
+            console.error(err);
+            // todo add alert could not fetch data
+        });
+};
 
-            countryName = document.getElementById("Country2").innerHTML = topFiveCountriesArray[1].name;
-            totalCases = document.getElementById("totalCases2").innerHTML = topFiveCountriesArray[1].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag2").src = topFiveCountriesArray[1].flag;
+const convertLastUpdatedToNormalizedDate = (lastUpdated) => {
+    const d = new Date(lastUpdated);
+    let formattedDate =
+        d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+    const hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+    const minutes = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+    const formattedTime = `${hours}:${minutes}`;
+    return `${formattedDate}  ${formattedTime}`;
+};
 
-            countryName = document.getElementById("Country3").innerHTML = topFiveCountriesArray[2].name;
-            totalCases = document.getElementById("totalCases3").innerHTML = topFiveCountriesArray[2].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag3").src = topFiveCountriesArray[2].flag;
+const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
+    // limit is used as the ceil
+    return casesPerCountyCollection
+        .sort((a, b) => b.cases - a.cases)
+        .splice(0, limit + 1)
+        .map((item, index) => {
+            return {
+                name: item.country,
+                number: item.cases.toLocaleString(),
+                flag: item.countryInfo.flag,
+                totalCasesId: `totalCases${index}`,
+                nameId: `Country${index}`,
+                flagId: `flag${index}`,
+            };
+        });
+};
 
-            countryName = document.getElementById("Country4").innerHTML = topFiveCountriesArray[3].name;
-            totalCases = document.getElementById("totalCases4").innerHTML = topFiveCountriesArray[3].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag4").src = topFiveCountriesArray[3].flag;
-
-            countryName = document.getElementById("Country5").innerHTML = topFiveCountriesArray[4].name;
-            totalCases = document.getElementById("totalCases5").innerHTML = topFiveCountriesArray[4].number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            flag = document.getElementById("flag5").src = topFiveCountriesArray[4].flag;
-        } else {
-            alert(request.status + "\n" + "System error");
+const addCountriesWithMostCasesToHtml = (countriesWithMostCases) => {
+    for (const country of countriesWithMostCases) {
+        if (document.getElementById(country.nameId)) {
+            // make the assignments only if the item exists in dom
+            document.getElementById(country.nameId).innerHTML = country.name;
+            document.getElementById(country.totalCasesId).innerHTML =
+                country.number;
+            document.getElementById(country.flagId).src = country.flag;
         }
     }
-}
-
-
-function getContinentsData() {
-    let request = new XMLHttpRequest();
-    var europeCases;
-    var asiaCases;
-    var americaCases = 0;
-    var africaCases;
-
-    request.open("GET", base_endpoint + getContinents);
-    request.send();
-    request.onload = () => {
-        if (request.status === 200) {
-            let result = JSON.parse(request.response);
-
-            for (var i = 0; i < result.length; i++) {
-                if (result[i].continent === "Europe") {
-                    europeCases = result[i].cases;
-                }
-                if (result[i].continent === "Asia") {
-                    asiaCases = result[i].cases;
-                }
-                if (result[i].continent === "North America") {
-                    americaCases += result[i].cases;
-                }
-                if (result[i].continent === "South America") {
-                    americaCases += result[i].cases;
-                }
-                if (result[i].continent === "Africa") {
-                    africaCases = result[i].cases;
-                }
-
-                // globalCases = globalCases + result[i].cases;
-            }
-
-            document.getElementById("europeCases").innerHTML = europeCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            document.getElementById("asiaCases").innerHTML = asiaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            document.getElementById("americaCases").innerHTML = americaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            document.getElementById("africaCases").innerHTML = africaCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    }
-}
+};
