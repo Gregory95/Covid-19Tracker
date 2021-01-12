@@ -65,6 +65,8 @@ function createRequest() {
             if (country === 'All') {
                 img_url.src = "/assets/img/images/world.jpg";
                 img_url.setAttribute('id', 'img_flag');
+                img_url.setAttribute('width', '500px');
+                img_url.setAttribute('height', '400px');
                 document.getElementById("img_flag").src = img_url.src;
             } else {
                 img_url.src = JSON.parse(request.response).countryInfo.flag;
