@@ -63,7 +63,7 @@ function createRequest() {
             }
 
             if (country === 'All') {
-                img_url.src = "../images/world.png";
+                img_url.src = "/assets/img/images/world.jpg";
                 img_url.setAttribute('id', 'img_flag');
                 document.getElementById("img_flag").src = img_url.src;
             } else {
