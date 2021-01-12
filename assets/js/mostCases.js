@@ -116,7 +116,7 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
     // limit is used as the ceil
     return casesPerCountyCollection
         .sort((a, b) => b.cases - a.cases)
-        .splice(0, limit + 1)
+        .splice(0, limit)
         .map((item, index) => {
             return {
                 name: item.country,
