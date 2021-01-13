@@ -15,8 +15,8 @@ const getGlobalData = () => {
     fetch(url)
         .then((response) => response.json())
         .catch((err) => {
-            console.errr(err);
-            alert(request.status + "\n" + "System error");
+            console.error(err);
+            alert("System error");
         })
         .then((result) => {
             if (document.getElementById("worldCases")) {
@@ -43,6 +43,7 @@ const dataPerTopCountries = () => {
                 results,
                 5
             ); // top 5
+            console.log(countriesWithMostCases);
             addCountriesWithMostCasesToHtml(countriesWithMostCases);
         });
 };
@@ -116,15 +117,15 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
     // limit is used as the ceil
     return casesPerCountyCollection
         .sort((a, b) => b.cases - a.cases)
-        .splice(0, limit + 1)
+        .splice(0, limit)
         .map((item, index) => {
             return {
                 name: item.country,
                 number: item.cases.toLocaleString(),
                 flag: item.countryInfo.flag,
-                totalCasesId: `totalCases${index}`,
-                nameId: `Country${index}`,
-                flagId: `flag${index}`,
+                totalCasesId: `totalCases${index+1}`,
+                nameId: `Country${index+1}`,
+                flagId: `flag${index+1}`,
             };
         });
 };
