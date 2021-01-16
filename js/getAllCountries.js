@@ -291,6 +291,7 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
         .map((item) => {
             return {
                 name: item.country,
+                flag: item.countryInfo.flag,
                 cases: item.cases.toLocaleString(),
                 deaths: item.deaths.toLocaleString(),
                 critical: item.critical.toLocaleString(),
@@ -305,23 +306,36 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
 
 const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
     let j = 0;
+
+
+
+
     for (const country of countriesOfEachContinent) {
-        document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = country.name;
-        document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML =
-            country.cases;
+        var oImg = document.createElement("img");
+        oImg.setAttribute('src', country.flag);
+        oImg.setAttribute('alt', 'flag');
+        oImg.width = '50';
+        oImg.height = '30';
+
+        document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML =
+            country.name;
+        document.getElementById("row" + j).getElementsByTagName('td')[1].append(oImg);
         document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML =
-            country.deaths;
+            country.cases;
         document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML =
-            country.critical;
+            country.deaths;
         document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML =
-            country.active;
+            country.critical;
         document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML =
-            country.todayCases;
+            country.active;
         document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML =
-            country.todayDeaths;
+            country.todayCases;
         document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML =
+            country.todayDeaths;
+        document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML =
             country.recovered;
-        document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = country.population;
+        document.getElementById("row" + j).getElementsByTagName('td')[9].innerHTML =
+            country.population;
         j++;
     }
 };
@@ -347,7 +361,7 @@ generateTableRows = (size, name) => {
         let newRow = tableRef.insertRow(tableRef.rows.length);
         newRow.setAttribute("id", "row" + i);
 
-        for (let j = 0; j < 9; j++) {
+        for (let j = 0; j < 10; j++) {
             // Insert a cell in the row at index 0
             newCell = newRow.insertCell(j);
         }
