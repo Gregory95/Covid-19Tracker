@@ -288,7 +288,7 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
     return countriesPerContinentCollecation
         .sort((a, b) => b.cases - a.cases)
         .splice(0, length)
-        .map((item, index) => {
+        .map((item) => {
             return {
                 name: item.country,
                 cases: item.cases.toLocaleString(),
@@ -299,15 +299,6 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
                 todayDeaths: item.todayDeaths.toLocaleString(),
                 recovered: item.recovered.toLocaleString(),
                 population: item.population.toLocaleString(),
-                nameId: `Country${index + 1}`,
-                totalCasesId: `totalCases${index + 1}`,
-                totalDeathsId: `totalDeaths${index + 1}`,
-                totalCriticalId: `totalCritical${index + 1}`,
-                totalActiveId: `totalActive${index + 1}`,
-                totalTodayCasesId: `totalTodayCases${index + 1}`,
-                totalTodayDeathsId: `totalTodayDeaths${index + 1}`,
-                totalRecoveredId: `totalRecovered${index + 1}`,
-                PopulationId: `Population${index + 1}`,
             };
         });
 };
@@ -315,7 +306,6 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
 const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
     let j = 0;
     for (const country of countriesOfEachContinent) {
-        // make the assignments only if the item exists in dom
         document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = country.name;
         document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML =
             country.cases;
