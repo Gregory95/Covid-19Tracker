@@ -6,18 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>World Metter</title>
         <!-- Favicons -->
-        <link href="/assets/img/images/virus.jpeg" rel="icon">
+        <link href="/assets/images/virus.jpeg" rel="icon">
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
       
         <!-- Vendor CSS Files -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
+        <!-- <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
         <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="/vendor/venobox/venobox.css" rel="stylesheet">
         <link href="/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="/vendor/aos/aos.css" rel="stylesheet">
+        <link href="/vendor/aos/aos.css" rel="stylesheet"> -->
       
         <!-- Template Main CSS File -->
         <link href="/css/allCases.css" rel="stylesheet">
@@ -25,7 +25,7 @@
       
       </head>
 
-<body onload="JavaScript:AutoRefresh(30000);">
+<body>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -194,7 +194,7 @@
 </body>
 
 <script>
-    function openContinent(evt, continentName) {
+    openContinent = (evt, continentName) => {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
