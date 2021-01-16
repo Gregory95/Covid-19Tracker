@@ -73,8 +73,8 @@ const getCountryData = () => {
             if (country === 'All') {
                 img_url.src = "../assets/images/world.jpg";
                 img_url.setAttribute('id', 'img_flag');
-                img_url.setAttribute('width', '350px');
-                img_url.setAttribute('height', '250px');
+                img_url.setAttribute('width', '250px');
+                img_url.setAttribute('height', '200px');
                 document.getElementById("img_flag").src = img_url.src;
 
             } else {
