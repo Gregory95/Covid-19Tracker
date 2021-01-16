@@ -100,6 +100,7 @@ const dataPerContinent = () => {
         .catch((err) => {
             console.error(err);
             // todo add alert could not fetch data
+            alert(response.statusCode + "Error: System could not retrieve data.");
         });
 };
 
@@ -123,9 +124,9 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
                 name: item.country,
                 number: item.cases.toLocaleString(),
                 flag: item.countryInfo.flag,
-                totalCasesId: `totalCases${index+1}`,
-                nameId: `Country${index+1}`,
-                flagId: `flag${index+1}`,
+                totalCasesId: `totalCases${index + 1}`,
+                nameId: `Country${index + 1}`,
+                flagId: `flag${index + 1}`,
             };
         });
 };
