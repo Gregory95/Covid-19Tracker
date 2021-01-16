@@ -20,6 +20,8 @@ var americaButton = document.querySelector("#btn3");
 var africaButton = document.querySelector("#btn4")
 var otherButton = document.querySelector("#btn5");
 
+
+
 eurButton.addEventListener("click", callEurope);
 
 asiaButton.addEventListener("click", callAsia);
@@ -41,7 +43,7 @@ function callAsia() {
 }
 
 function callAfrica() {
-    document.getElementById("Africa").getElementsByTagName("tbody").innerHTML = getAfticanCountries();
+    document.getElementById("Africa").getElementsByTagName("tbody").innerHTML = getAfricanCountries();
 }
 
 function callAmerica() {
@@ -61,253 +63,281 @@ const getEuropeanCountries = () => {
 
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    let j = 0;
-    let i = 0;
-
-    $("#europe tr").remove();
-    $("#asia tr").remove();
-    $("#america tr").remove();
-    $("#africa tr").remove();
-    $("#other tr").remove();
+    $('#europe tr').remove();
+    $('#asia tr').remove();
+    $('#america tr').remove();
+    $('#africa tr').remove();
+    $('#other tr').remove();
 
     $('.loader').show();
+
+    var europeCountriesCollection = [];
 
     fetch(url)
         .then((response) => response.json())
         .catch((err) => {
             console.error(err);
-            alert("System error");
+            alert("Something went wrong.");
         })
         .then((result) => {
-            console.log(result);
             $('.loader').hide();
-            europe_counter = 0;
-            for (let k = 0; k < 221; k++) {
-                if (result[k].continent === "Europe") {
-                    europe_counter++;
-                }
-
-
-                generateTableRows(europe_counter, "Europe");
-                for (i = 0; i < europe_counter; i++) {
-                    //API has a mistake on Cyprus, it gives it as Asian country but its not.
-                    if (result[i].continent === "Europe" || result[i].country === "Cyprus") {
-                        document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                        document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML = result[i].active.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML = "+" + result[i].todayCases.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML = "+" + result[i].todayDeaths.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML = result[i].recovered.toLocalString();
-                        document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = result[i].population.toLocalString();
-                        j++;
-                    }
+            for (var i = 0; i < result.length; i++) {
+                if ((result[i].continent === "Europe" || result[i].country === "Cyprus") && result[i].country != "Russia") {
+                    europeCountriesCollection.push(result[i]);
                 }
             }
+
+            generateTableRows(europeCountriesCollection.length, "Europe");
+
+            const contriesOfContinent = getCountriesPerContinentDetails(
+                europeCountriesCollection,
+                europeCountriesCollection.length
+            );
+            console.log(contriesOfContinent);
+
+            addCountriesOfEachContinentToHtml(contriesOfContinent);
+
         })
         .catch((err) => {
             console.error(err);
-            alert("System error");
+            alert("System error.");
         })
 }
 
 //Retrieve all the Asian Countries
 const getAsianCountries = () => {
-    let j = 0;
-    let i = 0;
 
-    $("#europe tr").remove();
-    $("#asia tr").remove();
-    $("#america tr").remove();
-    $("#africa tr").remove();
-    $("#other tr").remove();
+    const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    let request = new XMLHttpRequest();
-    request.open("GET", base_endpoint + getAllCountries + "desc");
-    request.send();
+    $('#europe tr').remove();
+    $('#asia tr').remove();
+    $('#america tr').remove();
+    $('#africa tr').remove();
+    $('#other tr').remove();
+
     $('.loader').show();
-    request.onload = () => {
-        let result = JSON.parse(request.response);
-        if (request.status === 200) {
+
+    var asianCountriesCollection = [];
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("Something went wrong.");
+        })
+        .then((result) => {
             $('.loader').hide();
-            asia_counter = 0;
-            for (let k = 0; k < result.length; k++) {
-                if (result[k].continent === "Asia") {
-                    asia_counter++;
+            for (var i = 0; i < result.length; i++) {
+                if ((result[i].continent === "Asia" || result[i].country === "Russia") && result[i].country != "Cyprus") {
+                    asianCountriesCollection.push(result[i]);
                 }
             }
 
-            generateTableRows(asia_counter, "Asia");
-            for (i = 0; i < result.length; i++) {
-                //API has a mistake on Cyprus, it gives it as Asian country but its not.
-                if (result[i].continent === "Asia" && result[i].country != "Cyprus") {
-                    document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML = result[i].active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML = "+" + result[i].todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML = "+" + result[i].todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML = result[i].recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = result[i].population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    j++;
-                }
-            }
-        } else {
-            alert(request.status + "\n" + "System error");
-        }
-    }
+            generateTableRows(asianCountriesCollection.length, "Asia");
+
+            const contriesOfContinent = getCountriesPerContinentDetails(
+                asianCountriesCollection,
+                asianCountriesCollection.length
+            );
+
+            addCountriesOfEachContinentToHtml(contriesOfContinent);
+
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("System error.");
+        })
 }
 
 
 //Retrieve all the America Countries
 const getAmericaCountries = () => {
-    let j = 0;
-    let i = 0;
+    const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $("#europe tr").remove();
-    $("#asia tr").remove();
-    $("#america tr").remove();
-    $("#africa tr").remove();
-    $("#other tr").remove();
+    $('#europe tr').remove();
+    $('#asia tr').remove();
+    $('#america tr').remove();
+    $('#africa tr').remove();
+    $('#other tr').remove();
 
-    let request = new XMLHttpRequest();
-    request.open("GET", base_endpoint + getAllCountries + "desc");
-    request.send();
     $('.loader').show();
-    request.onload = () => {
-        let result = JSON.parse(request.response);
-        if (request.status === 200) {
+
+    var americanCountriesCollection = [];
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("Something went wrong.");
+        })
+        .then((result) => {
             $('.loader').hide();
-            america_counter = 0;
-            for (let k = 0; k < result.length; k++) {
-                if (result[k].continent === "North America" || result[k].continent === "South America") {
-                    america_counter++;
-                }
-            }
-
-
-            generateTableRows(america_counter, "America");
-            for (i = 0; i < result.length; i++) {
+            for (var i = 0; i < result.length; i++) {
                 if (result[i].continent === "North America" || result[i].continent === "South America") {
-                    document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML = result[i].active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML = "+" + result[i].todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML = "+" + result[i].todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML = result[i].recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = result[i].population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    j++;
+                    americanCountriesCollection.push(result[i]);
                 }
             }
-        } else {
-            alert(request.status + "\n" + "System error");
-        }
-    }
+
+            generateTableRows(americanCountriesCollection.length, "America");
+
+            const contriesOfContinent = getCountriesPerContinentDetails(
+                americanCountriesCollection,
+                americanCountriesCollection.length
+            );
+
+            addCountriesOfEachContinentToHtml(contriesOfContinent);
+
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("System error.");
+        })
 }
 
 //Retrieve all the Aftican Countries
-const getAfticanCountries = () => {
-    let j = 0;
-    let i = 0;
+const getAfricanCountries = () => {
+    const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $("#europe tr").remove();
-    $("#asia tr").remove();
-    $("#america tr").remove();
-    $("#africa tr").remove();
-    $("#other tr").remove();
+    $('#europe tr').remove();
+    $('#asia tr').remove();
+    $('#america tr').remove();
+    $('#africa tr').remove();
+    $('#other tr').remove();
 
-    let request = new XMLHttpRequest();
-    request.open("GET", base_endpoint + getAllCountries + "desc");
-    request.send();
     $('.loader').show();
-    request.onload = () => {
-        let result = JSON.parse(request.response);
-        if (request.status === 200) {
+
+    var afticanCountriesCollection = [];
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("Something went wrong.");
+        })
+        .then((result) => {
             $('.loader').hide();
-            africa_counter = 0;
-            for (let k = 0; k < result.length; k++) {
-                if (result[k].continent === "Africa") {
-                    africa_counter++;
-                }
-            }
-
-
-            generateTableRows(africa_counter, "Africa");
-            for (i = 0; i < result.length; i++) {
+            for (var i = 0; i < result.length; i++) {
                 if (result[i].continent === "Africa") {
-                    document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML = result[i].active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML = "+" + result[i].todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML = "+" + result[i].todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML = result[i].recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = result[i].population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    j++;
+                    afticanCountriesCollection.push(result[i]);
                 }
             }
-        } else {
-            alert(request.status + "\n" + "System error");
-        }
-    }
+
+            generateTableRows(afticanCountriesCollection.length, "Africa");
+
+            const contriesOfContinent = getCountriesPerContinentDetails(
+                afticanCountriesCollection,
+                afticanCountriesCollection.length
+            );
+
+            addCountriesOfEachContinentToHtml(contriesOfContinent);
+
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("System error.");
+        })
 }
 
 
 //Retrieve all the Other Countries
 const getOtherCountries = () => {
-    let j = 0;
-    let i = 0;
+    const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $("#europe tr").remove();
-    $("#asia tr").remove();
-    $("#america tr").remove();
-    $("#africa tr").remove();
-    $("#other tr").remove();
+    $('#europe tr').remove();
+    $('#asia tr').remove();
+    $('#america tr').remove();
+    $('#africa tr').remove();
+    $('#other tr').remove();
 
-    let request = new XMLHttpRequest();
-    request.open("GET", base_endpoint + getAllCountries + "desc");
-    request.send();
     $('.loader').show();
-    request.onload = () => {
-        let result = JSON.parse(request.response);
-        if (request.status === 200) {
+
+    var otherCountriesCollection = [];
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("Something went wrong.");
+        })
+        .then((result) => {
             $('.loader').hide();
-            other_counter = 0;
-            for (let k = 0; k < result.length; k++) {
-                if (result[k].continent != "Europe" && result[k].continent != "Asia" && result[k].continent != "Africa" && result[k].continent != "North America" && result[k].continent != "South America") {
-                    other_counter++;
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].continent != "Europe" && result[i].continent != "Africa" && result[i].continent != "South America" && result[i].continent != "North America" && result[i].continent != "Asia") {
+                    otherCountriesCollection.push(result[i]);
                 }
             }
 
+            generateTableRows(otherCountriesCollection.length, "Other");
 
-            generateTableRows(other_counter, "Other");
-            for (i = 0; i < result.length; i++) {
-                if (result[i].continent != "Europe" && result[i].continent != "Asia" && result[i].continent != "Africa" && result[i].continent != "North America" && result[i].continent != "South America") {
-                    document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = result[i].country;
-                    document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML = result[i].cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML = result[i].deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML = result[i].critical.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML = result[i].active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML = "+" + result[i].todayCases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML = "+" + result[i].todayDeaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML = result[i].recovered.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = result[i].population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    j++;
-                }
-            }
-        } else {
-            alert(request.status + "\n" + "System error");
-        }
-    }
+            const contriesOfContinent = getCountriesPerContinentDetails(
+                otherCountriesCollection,
+                otherCountriesCollection.length
+            );
+
+            addCountriesOfEachContinentToHtml(contriesOfContinent);
+
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("System error.");
+        })
 }
 
+const getCountriesPerContinentDetails = (countriesPerContinentCollecation, length) => {
+    // length is used as the ceil
+    return countriesPerContinentCollecation
+        .sort((a, b) => b.cases - a.cases)
+        .splice(0, length)
+        .map((item, index) => {
+            return {
+                name: item.country,
+                cases: item.cases.toLocaleString(),
+                deaths: item.deaths.toLocaleString(),
+                critical: item.critical.toLocaleString(),
+                active: item.active.toLocaleString(),
+                todayCases: item.todayCases.toLocaleString(),
+                todayDeaths: item.todayDeaths.toLocaleString(),
+                recovered: item.recovered.toLocaleString(),
+                population: item.population.toLocaleString(),
+                nameId: `Country${index + 1}`,
+                totalCasesId: `totalCases${index + 1}`,
+                totalDeathsId: `totalDeaths${index + 1}`,
+                totalCriticalId: `totalCritical${index + 1}`,
+                totalActiveId: `totalActive${index + 1}`,
+                totalTodayCasesId: `totalTodayCases${index + 1}`,
+                totalTodayDeathsId: `totalTodayDeaths${index + 1}`,
+                totalRecoveredId: `totalRecovered${index + 1}`,
+                PopulationId: `Population${index + 1}`,
+            };
+        });
+};
 
-const generateTableRows = (size, name) => {
+const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
+    let j = 0;
+    for (const country of countriesOfEachContinent) {
+        // make the assignments only if the item exists in dom
+        document.getElementById("row" + j).getElementsByTagName('td')[0].innerHTML = country.name;
+        document.getElementById("row" + j).getElementsByTagName('td')[1].innerHTML =
+            country.cases;
+        document.getElementById("row" + j).getElementsByTagName('td')[2].innerHTML =
+            country.deaths;
+        document.getElementById("row" + j).getElementsByTagName('td')[3].innerHTML =
+            country.critical;
+        document.getElementById("row" + j).getElementsByTagName('td')[4].innerHTML =
+            country.active;
+        document.getElementById("row" + j).getElementsByTagName('td')[5].innerHTML =
+            country.todayCases;
+        document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML =
+            country.todayDeaths;
+        document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML =
+            country.recovered;
+        document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML = country.population;
+        j++;
+    }
+};
+
+
+generateTableRows = (size, name) => {
     let newCell;
 
     for (let i = 0; i < size; i++) {
