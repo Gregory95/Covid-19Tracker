@@ -296,8 +296,8 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
                 deaths: item.deaths.toLocaleString(),
                 critical: item.critical.toLocaleString(),
                 active: item.active.toLocaleString(),
-                todayCases: item.todayCases.toLocaleString(),
-                todayDeaths: item.todayDeaths.toLocaleString(),
+                todayCases: item.todayCases === 0 ? item.todayCases.toLocaleString() : "+" + item.todayCases.toLocaleString(),
+                todayDeaths: item.todayDeaths === 0 ? item.todayDeaths.toLocaleString() : "+" + item.todayDeaths.toLocaleString(),
                 recovered: item.recovered.toLocaleString(),
                 population: item.population.toLocaleString(),
             };
@@ -330,10 +330,15 @@ const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
             country.active;
         document.getElementById("row" + j).getElementsByTagName('td')[6].innerHTML =
             country.todayCases;
+        if (country.todayCases != 0)
+            document.getElementById("row" + j).getElementsByTagName('td')[6].style.color = 'darkorange';
         document.getElementById("row" + j).getElementsByTagName('td')[7].innerHTML =
             country.todayDeaths;
+        if (country.todayDeaths != 0)
+            document.getElementById("row" + j).getElementsByTagName('td')[7].style.color = 'red';
         document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML =
             country.recovered;
+        document.getElementById("row" + j).getElementsByTagName('td')[8].style.color = 'darkgreen'
         document.getElementById("row" + j).getElementsByTagName('td')[9].innerHTML =
             country.population;
         j++;
