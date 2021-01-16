@@ -71,7 +71,7 @@ const getCountryData = () => {
             counter++;
 
             if (country === 'All') {
-                img_url.src = "/assets/img/images/world.jpg";
+                img_url.src = "../assets/images/world.jpg";
                 img_url.setAttribute('id', 'img_flag');
                 img_url.setAttribute('width', '350px');
                 img_url.setAttribute('height', '250px');
