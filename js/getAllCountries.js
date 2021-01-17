@@ -307,9 +307,6 @@ const getCountriesPerContinentDetails = (countriesPerContinentCollecation, lengt
 const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
     let j = 0;
 
-
-
-
     for (const country of countriesOfEachContinent) {
         var oImg = document.createElement("img");
         oImg.setAttribute('src', country.flag);

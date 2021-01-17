@@ -5,7 +5,7 @@ const getAllCountries = 'v2/countries?sort='; //sort query parameter -> desc or 
 const getSingleCountry = 'v2/countries'; ///v2/countries/:country add country name at the end
 const getUnitedStatesOfAmerica = 'v2/states';
 const getHOpkinsCSSE = 'v2/jhucsse';
-const getHistory = 'v2/historical/'; //v2/historical/:country get history of specific country
+const getHistory = 'v2/historical'; //v2/historical/:country get history of specific country
 
 //counter helps me to keep one flag image on the screen at a time.
 var counter = 0;
@@ -27,17 +27,21 @@ const getCountryData = () => {
     var img_url = new Image();
 
     let country = document.getElementById("country2").value.trim();
+    let days = document.getElementById("history").value.trim();
+    console.log(days);
     var singleCountryUrl = `${baseEndpoint}/${getSingleCountry}/${country}`;
     const getAllDataUrl = `${baseEndpoint}/${getAllData}`;
 
     if (country === "All") {
         url = getAllDataUrl;
+        document.getElementById("history").disabled = true;
     } else if (country === '-1') {
         clearTable();
         alert("\n" + "Please select a country!");
         document.getElementById("content-left").style.display = "none";
     } else {
         url = singleCountryUrl;
+        document.getElementById("history").disabled = false;
     }
 
     fetch(url)
@@ -51,15 +55,11 @@ const getCountryData = () => {
 
             /*Left content of the page*/
             document.getElementById("flag").style.display = "none";
-            document.getElementById("totalCases").innerHTML = result.cases.toLocaleString();
-            document.getElementById("totalDeaths").innerHTML = result.deaths.toLocaleString();
-            document.getElementById("activeCases").innerHTML = result.active.toLocaleString();
-            document.getElementById("recovered").innerHTML = result.recovered.toLocaleString();
-            document.getElementById("totalDeaths").innerHTML = result.deaths.toLocaleString();
-            document.getElementById("deathsToday").innerHTML = "+" + result.todayDeaths.toLocaleString();
-            document.getElementById("casesToday").innerHTML = "+" + result.todayCases.toLocaleString();
-            document.getElementById("tests").innerHTML = result.tests.toLocaleString();
-            document.getElementById("updateTime").innerHTML = convertLastUpdatedToNormalizedDate(result.updated);
+
+            addCountryToHtml(result);
+            if (days != "-1" && country != "All")
+                getHistoricalDataByCountry(country);
+
             document.getElementById("flag").style.display = "block";
 
 
@@ -89,6 +89,79 @@ const getCountryData = () => {
             alert("Information about " + country + " are not available.");
         });
 }
+
+const getHistoricalDataByCountry = (country) => {
+
+    let historyOption = document.getElementById("history").value;
+
+    let days = 0;
+    if (historyOption === "Yesterday")
+        days = 1;
+    else if (historyOption === "Week ago")
+        days = 7;
+    else if (historyOption === "15 days ago")
+        days = 15;
+    else if (historyOption === "Month ago")
+        days = 30;
+    else
+        days = 0;
+
+    var historyObject = {
+        cases: "",
+        deaths: "",
+        recovered: ""
+    }
+
+    var historicalDataByCountryAndDays = `${baseEndpoint}/${getHistory}/${country}?lastdays=${days}`;
+
+    fetch(historicalDataByCountryAndDays)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("Something went wrong.");
+        })
+        .then((result) => {
+
+            $('.loader').hide();
+
+            historyObject = {
+                cases: result.timeline.cases[Object.keys(result.timeline.cases)[0]],
+                deaths: result.timeline.deaths[Object.keys(result.timeline.deaths)[0]],
+                recovered: result.timeline.recovered[Object.keys(result.timeline.recovered)[0]]
+            }
+
+            addHistoricalDataToHtml(historyObject);
+
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("System error.");
+        })
+
+}
+
+
+const addCountryToHtml = (country) => {
+
+    document.getElementById("totalCases").innerHTML = country.cases.toLocaleString();
+    document.getElementById("totalDeaths").innerHTML = country.deaths.toLocaleString();
+    document.getElementById("activeCases").innerHTML = country.active.toLocaleString();
+    document.getElementById("recovered").innerHTML = country.recovered.toLocaleString();
+    document.getElementById("totalDeaths").innerHTML = country.deaths.toLocaleString();
+    document.getElementById("deathsToday").innerHTML = "+" + country.todayDeaths.toLocaleString();
+    document.getElementById("casesToday").innerHTML = "+" + country.todayCases.toLocaleString();
+    document.getElementById("tests").innerHTML = country.tests.toLocaleString();
+    document.getElementById("updateTime").innerHTML = convertLastUpdatedToNormalizedDate(country.updated)
+
+};
+
+const addHistoricalDataToHtml = (history) => {
+
+    document.getElementById("totalCases").innerHTML = history.cases.toLocaleString();
+    document.getElementById("totalDeaths").innerHTML = history.deaths.toLocaleString();
+    document.getElementById("recovered").innerHTML = history.recovered.toLocaleString();
+
+};
 
 const convertLastUpdatedToNormalizedDate = (lastUpdated) => {
     const d = new Date(lastUpdated);
