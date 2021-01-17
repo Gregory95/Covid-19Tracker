@@ -99,11 +99,11 @@ const getHistoricalDataByCountry = (country) => {
     let days = 0;
     if (historyOption === "Yesterday")
         days = 1;
-    else if (historyOption === "Week ago")
+    else if (historyOption === "Last week")
         days = 7;
-    else if (historyOption === "15 days ago")
+    else if (historyOption === "Last 15 days")
         days = 15;
-    else if (historyOption === "Month ago")
+    else if (historyOption === "Last month")
         days = 30;
     else
         days = 0;

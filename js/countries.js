@@ -262,9 +262,9 @@ const continents = [
 
 const history = [
     "Yesterday",
-    "Week ago",
-    "15 days ago",
-    "Month ago"
+    "Last week",
+    "Last 15 days",
+    "Last month"
 ]
 
 function populateHistoryOptions(historyElementId) {
