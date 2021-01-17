@@ -1,26 +1,23 @@
+"use strict";
+
 //Novel Covid-19 APIs
 const baseEndpoint = 'https://corona.lmao.ninja';
 const getAllData = 'v2/all';
-const getAllCountries = 'v2/countries?sort='; //sort query parameter -> desc or asc
+const getAllCountries = 'v2/countries?'; //sort query parameter -> desc or asc
 const getSingleCountry = 'v2/countries/'; ///v2/countries/:country add country name at the end
 
 
 
-//helpers
-let europe_counter = 0;
-let asia_counter = 0;
-let america_counter = 0;
-let africa_counter = 0;
-let other_counter = 0;
+var worldButton = document.querySelector('#worldButton');
+var eurButton = document.querySelector("#europeButton");
+var asiaButton = document.querySelector("#asiaButton");
+var americaButton = document.querySelector("#americaButton");
+var africaButton = document.querySelector("#africaButton")
+var otherButton = document.querySelector("#otherButton");
 
 
-var eurButton = document.querySelector("#btn1");
-var asiaButton = document.querySelector("#btn2");
-var americaButton = document.querySelector("#btn3");
-var africaButton = document.querySelector("#btn4")
-var otherButton = document.querySelector("#btn5");
 
-
+worldButton.addEventListener("click", callWorld);
 
 eurButton.addEventListener("click", callEurope);
 
@@ -33,41 +30,77 @@ africaButton.addEventListener("click", callAfrica);
 otherButton.addEventListener("click", callOther);
 
 
+function callWorld() {
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getGlobalData();
+}
 
 function callEurope() {
-    document.getElementById("Europe").getElementsByTagName("tbody").innerHTML = getEuropeanCountries();
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getEuropeanCountries();
 }
 
 function callAsia() {
-    document.getElementById("Asia").getElementsByTagName("tbody").innerHTML = getAsianCountries();
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getAsianCountries();
 }
 
 function callAfrica() {
-    document.getElementById("Africa").getElementsByTagName("tbody").innerHTML = getAfricanCountries();
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getAfricanCountries();
 }
 
 function callAmerica() {
-    document.getElementById("America").getElementsByTagName("tbody").innerHTML = getAmericaCountries();
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getAmericaCountries();
 }
 
 function callOther() {
-    document.getElementById("Other").getElementsByTagName("tbody").innerHTML = getOtherCountries();
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getOtherCountries();
 }
 
 
+window.onload = () => {
+    document.getElementById("worldButton").click();
+}
 
+// world metter
+const getGlobalData = () => {
+    const url = `${baseEndpoint}/${getAllCountries}desc`;
 
+    $('#continent tr').remove();
+
+    $('.loader').show();
+
+    var allCountriesCollection = [];
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            alert("System error");
+        })
+        .then((result) => {
+            $('.loader').hide();
+            for (var i = 0; i < result.length; i++) {
+                allCountriesCollection.push(result[i]);
+            }
+            generateTableRows(allCountriesCollection.length);
+
+            const contries = getCountriesPerContinentDetails(
+                allCountriesCollection,
+                allCountriesCollection.length
+            );
+
+            addCountriesOfEachContinentToHtml(contries);
+        })
+        .catch((err) => {
+            console.error(err);
+            alert("Could not get data.");
+        });
+};
 
 //Retrieve all the European Countries
 const getEuropeanCountries = () => {
 
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $('#europe tr').remove();
-    $('#asia tr').remove();
-    $('#america tr').remove();
-    $('#africa tr').remove();
-    $('#other tr').remove();
+    $('#continent tr').remove();
 
     $('.loader').show();
 
@@ -87,7 +120,7 @@ const getEuropeanCountries = () => {
                 }
             }
 
-            generateTableRows(europeCountriesCollection.length, "Europe");
+            generateTableRows(europeCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
                 europeCountriesCollection,
@@ -109,11 +142,7 @@ const getAsianCountries = () => {
 
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $('#europe tr').remove();
-    $('#asia tr').remove();
-    $('#america tr').remove();
-    $('#africa tr').remove();
-    $('#other tr').remove();
+    $('#continent tr').remove();
 
     $('.loader').show();
 
@@ -133,7 +162,7 @@ const getAsianCountries = () => {
                 }
             }
 
-            generateTableRows(asianCountriesCollection.length, "Asia");
+            generateTableRows(asianCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
                 asianCountriesCollection,
@@ -154,11 +183,7 @@ const getAsianCountries = () => {
 const getAmericaCountries = () => {
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $('#europe tr').remove();
-    $('#asia tr').remove();
-    $('#america tr').remove();
-    $('#africa tr').remove();
-    $('#other tr').remove();
+    $('#continent tr').remove();
 
     $('.loader').show();
 
@@ -178,7 +203,7 @@ const getAmericaCountries = () => {
                 }
             }
 
-            generateTableRows(americanCountriesCollection.length, "America");
+            generateTableRows(americanCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
                 americanCountriesCollection,
@@ -198,11 +223,7 @@ const getAmericaCountries = () => {
 const getAfricanCountries = () => {
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $('#europe tr').remove();
-    $('#asia tr').remove();
-    $('#america tr').remove();
-    $('#africa tr').remove();
-    $('#other tr').remove();
+    $('#continent tr').remove();
 
     $('.loader').show();
 
@@ -222,7 +243,7 @@ const getAfricanCountries = () => {
                 }
             }
 
-            generateTableRows(afticanCountriesCollection.length, "Africa");
+            generateTableRows(afticanCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
                 afticanCountriesCollection,
@@ -243,11 +264,7 @@ const getAfricanCountries = () => {
 const getOtherCountries = () => {
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
-    $('#europe tr').remove();
-    $('#asia tr').remove();
-    $('#america tr').remove();
-    $('#africa tr').remove();
-    $('#other tr').remove();
+    $('#continent tr').remove();
 
     $('.loader').show();
 
@@ -267,7 +284,7 @@ const getOtherCountries = () => {
                 }
             }
 
-            generateTableRows(otherCountriesCollection.length, "Other");
+            generateTableRows(otherCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
                 otherCountriesCollection,
@@ -335,7 +352,7 @@ const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
             document.getElementById("row" + j).getElementsByTagName('td')[7].style.color = 'red';
         document.getElementById("row" + j).getElementsByTagName('td')[8].innerHTML =
             country.recovered;
-        document.getElementById("row" + j).getElementsByTagName('td')[8].style.color = 'darkgreen'
+        document.getElementById("row" + j).getElementsByTagName('td')[8].style.color = '#006400'
         document.getElementById("row" + j).getElementsByTagName('td')[9].innerHTML =
             country.population;
         j++;
@@ -343,21 +360,12 @@ const addCountriesOfEachContinentToHtml = (countriesOfEachContinent) => {
 };
 
 
-generateTableRows = (size, name) => {
+const generateTableRows = (size) => {
     let newCell;
 
     for (let i = 0; i < size; i++) {
-        if (name === "Europe")
-            var tableRef = document.getElementById('myTable1').getElementsByTagName('tbody')[0];
-        else if (name === "Asia")
-            var tableRef = document.getElementById('myTable2').getElementsByTagName('tbody')[0];
-        else if (name === "America")
-            var tableRef = document.getElementById('myTable3').getElementsByTagName('tbody')[0];
-        else if (name === "Africa")
-            var tableRef = document.getElementById('myTable4').getElementsByTagName('tbody')[0];
-        else if (name === "Other")
-            var tableRef = document.getElementById('myTable5').getElementsByTagName('tbody')[0];
-        else break;
+        var tableRef = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
 
         // Insert a row in the table at row index 0
         let newRow = tableRef.insertRow(tableRef.rows.length);

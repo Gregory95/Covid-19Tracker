@@ -36,18 +36,6 @@ h4 {
 }
 
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: black;
-    font-size: 15px;
-    opacity: 0.9;
-    text-align: center;
-    clear: both;
-}
-
 @media screen and (max-width: 910px) {
 
     body {

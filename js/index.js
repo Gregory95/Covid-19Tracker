@@ -1,3 +1,5 @@
+"use strict";
+
 //Novel Covid-19 APIs
 const baseEndpoint = 'https://corona.lmao.ninja';
 const getAllData = 'v2/all';
@@ -6,6 +8,8 @@ const getSingleCountry = 'v2/countries'; ///v2/countries/:country add country na
 const getUnitedStatesOfAmerica = 'v2/states';
 const getHOpkinsCSSE = 'v2/jhucsse';
 const getHistory = 'v2/historical'; //v2/historical/:country get history of specific country
+
+
 
 //counter helps me to keep one flag image on the screen at a time.
 var counter = 0;
@@ -28,7 +32,7 @@ const getCountryData = () => {
 
     let country = document.getElementById("country2").value.trim();
     let days = document.getElementById("history").value.trim();
-    console.log(days);
+
     var singleCountryUrl = `${baseEndpoint}/${getSingleCountry}/${country}`;
     const getAllDataUrl = `${baseEndpoint}/${getAllData}`;
 
@@ -70,21 +74,19 @@ const getCountryData = () => {
 
             counter++;
 
-            if (country === 'All') {
+            if (country === 'All')
                 img_url.src = "../assets/images/world.jpg";
-                img_url.setAttribute('id', 'img_flag');
-                img_url.setAttribute('width', '250px');
-                img_url.setAttribute('height', '200px');
-                document.getElementById("img_flag").src = img_url.src;
-
-            } else {
+            else
                 img_url.src = result.countryInfo.flag;
-                img_url.setAttribute('id', 'img_flag');
-                document.getElementById("img_flag").src = img_url.src;
-            }
+
+            img_url.setAttribute('id', 'img_flag');
+            img_url.setAttribute('width', '250px');
+            img_url.setAttribute('height', '200px');
+            document.getElementById("img_flag").src = img_url.src;
 
         }).catch((err) => {
             console.error(err);
+            clearTable();
             document.getElementById("content-left").style.display = "none";
             alert("Information about " + country + " are not available.");
         });
@@ -118,6 +120,7 @@ const getHistoricalDataByCountry = (country) => {
         .then((response) => response.json())
         .catch((err) => {
             console.error(err);
+            clearTable();
             alert("Something went wrong.");
         })
         .then((result) => {
@@ -135,7 +138,8 @@ const getHistoricalDataByCountry = (country) => {
         })
         .catch((err) => {
             console.error(err);
-            alert("System error.");
+            clearTable();
+            alert("System could not find information about " + country + " for last " + days + " days");
         })
 
 }
@@ -156,6 +160,12 @@ const addCountryToHtml = (country) => {
 };
 
 const addHistoricalDataToHtml = (history) => {
+
+    document.getElementById("totalCases").innerHTML = "";
+    document.getElementById("totalDeaths").innerHTML = "";
+    document.getElementById("recovered").innerHTML = "";
+    document.getElementById("deathsToday").innerHTML = 0;
+    document.getElementById("casesToday").innerHTML = 0;
 
     document.getElementById("totalCases").innerHTML = history.cases.toLocaleString();
     document.getElementById("totalDeaths").innerHTML = history.deaths.toLocaleString();

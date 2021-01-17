@@ -1,3 +1,5 @@
+"use strict";
+
 const countries = [
     "All",
     "Afghanistan",
@@ -250,7 +252,7 @@ const countries = [
 ];
 
 const continents = [
-    "All",
+    "World",
     "Europe",
     "Asia",
     "Africa",

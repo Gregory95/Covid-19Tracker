@@ -178,18 +178,6 @@ td {
     padding: 20px;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: black;
-    font-size: 15px;
-    opacity: 0.9;
-    text-align: center;
-    clear: both;
-}
-
 
 @media screen and (max-width: 1400px) {
 
@@ -233,11 +221,6 @@ footer {
     #flag {
         margin-bottom: 100px;
         margin-left: 1em;
-    }
-
-    footer {
-        font-size: 12px;
-        margin-top: 50px;
     }
 
 }

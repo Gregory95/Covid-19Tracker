@@ -1,3 +1,5 @@
+"use strict";
+
 const baseEndpoint = "https://corona.lmao.ninja";
 const allCountriesEndpoint = "v2/countries?sort="; //sort query parameter -> desc or asc
 const continentsEndpoint = "v2/continents";

@@ -1,6 +1,6 @@
 let api_result = new Array();
 
-function generateTableHead(table, data) {
+const generateTableHead = (table, data) => {
     let head = table.createTHead();
     let row = thead.insertRow();
     for (let key of data) {
@@ -11,7 +11,7 @@ function generateTableHead(table, data) {
     }
 }
 
-function generateTable(table, data) {
+const generateTable = (table, data) => {
     for (let element of data) {
         let row = table.insertRow();
         for (key in element) {
