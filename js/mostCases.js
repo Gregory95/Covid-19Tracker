@@ -5,11 +5,17 @@ const allCountriesEndpoint = "v2/countries?sort="; //sort query parameter -> des
 const continentsEndpoint = "v2/continents";
 const allDataEndpoint = "v2/all";
 
+
 window.onload = () => {
     getGlobalData();
     dataPerContinent();
     dataPerTopCountries();
 };
+
+google.charts.load('current', {
+    'packages': ['corechart']
+});
+google.charts.setOnLoadCallback(drawChart);
 
 const getGlobalData = () => {
     const url = `${baseEndpoint}/${allDataEndpoint}`;
@@ -31,6 +37,7 @@ const getGlobalData = () => {
                     result.updated
                 );
             }
+            drawChart(result.cases, result.deaths, result.active, result.recovered);
         });
 };
 
@@ -125,6 +132,9 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
             return {
                 name: item.country,
                 number: item.cases.toLocaleString(),
+                deaths: item.deaths.toLocaleString(),
+                recovered: item.recovered.toLocaleString(),
+                activeCases: item.active.toLocaleString(),
                 flag: item.countryInfo.flag,
                 totalCasesId: `totalCases${index + 1}`,
                 nameId: `Country${index + 1}`,
@@ -144,3 +154,25 @@ const addCountriesWithMostCasesToHtml = (countriesWithMostCases) => {
         }
     }
 };
+
+// Draw the chart and set the chart values
+function drawChart(cases, deaths, active, recovered) {
+    var data = google.visualization.arrayToDataTable([
+        ['Information', 'World'],
+        ['Cases', cases],
+        ['Deaths', deaths],
+        ['Active Cases', active],
+        ['Recoved', recovered],
+    ]);
+
+    // Optional; add a title and set the width and height of the chart
+    var options = {
+        'title': 'World Cases',
+        'width': 550,
+        'height': 400
+    };
+
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+}
