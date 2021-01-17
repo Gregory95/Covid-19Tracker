@@ -50,7 +50,7 @@ body {
 
 #country2 {
     border-radius: 4px;
-    background: #229bdc url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+    background: #229bdc;
     color: white;
     width: 400px;
     padding: 17px 20px;
@@ -62,10 +62,34 @@ body {
 #country2:hover {
     transition: 0.3s;
     color: black;
-    background: #dce0f1 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/dropdown-arrows.png") 313px 18px no-repeat;
+    background-color:inherit;
 }
 
 #country2:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+#history {
+    border-radius: 4px;
+    background: #229bdc;
+    color: white;
+    width: 400px;
+    padding: 17px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#history:hover {
+    transition: 0.3s;
+    color: black;
+    background-color:inherit;
+
+}
+
+#history:focus {
     outline: none;
     box-shadow: none;
 }
@@ -159,14 +183,12 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    color: white;
-    background-color: #111;
-    font-size: 16px;
+    color: black;
+    font-size: 15px;
     opacity: 0.9;
     text-align: center;
     clear: both;
 }
-
 
 
 @media screen and (max-width: 1400px) {
@@ -181,6 +203,9 @@ footer {
     #dropdown {
         margin-top: 5em;
         margin-left: 1em;
+        width: 300px;
+    }
+    #history{
         width: 300px;
     }
 

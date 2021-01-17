@@ -57,8 +57,12 @@
                 <script src="/js/countries.js"></script>
                 <select id="country2" name="country2"></select>
             </div>
+            <div id="dropdown-list">
+                <select style="margin-top:2px" id="history" name="history"></select>
+            </div>
             <button id="runApi">Select</button>
         </div>
+
         <div class="api-details">
             <div id="content-left">
                 <table class="table-light table-bordered">
@@ -135,6 +139,7 @@
   <script src="/js/main.js"></script>
   <script>
     populateCountries("country2");
+    populateHistoryOptions("history");
   </script> 
 
   <script src="/js/dateTime.js"></script>

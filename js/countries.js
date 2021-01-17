@@ -258,6 +258,28 @@ const continents = [
     "Other"
 ];
 
+const history = [
+    "Yesterday",
+    "Week ago",
+    "15 days ago",
+    "Month ago"
+]
+
+function populateHistoryOptions(historyElementId) {
+    // given the id of the <select> tag as function argument, it inserts <option> tags
+    const historyElement = document.getElementById(historyElementId);
+    historyElement.length = 0;
+    historyElement.options[0] = new Option("Today", "-1");
+    historyElement.selectedIndex = 0;
+
+    for (let i = 0; i < history.length; i++) {
+        historyElement.options[historyElement.length] = new Option(
+            history[i],
+            history[i]
+        );
+    }
+}
+
 function populateCountries(countryElementId, stateElementId) {
     // given the id of the <select> tag as function argument, it inserts <option> tags
     const countryElement = document.getElementById(countryElementId);
