@@ -5,17 +5,14 @@ const allCountriesEndpoint = "v2/countries?sort="; //sort query parameter -> des
 const continentsEndpoint = "v2/continents";
 const allDataEndpoint = "v2/all";
 
+google.load("visualization", "1", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(drawPieCharts);
 
 window.onload = () => {
     getGlobalData();
     dataPerContinent();
     dataPerTopCountries();
 };
-
-google.charts.load('current', {
-    'packages': ['corechart']
-});
-google.charts.setOnLoadCallback(drawChart);
 
 const getGlobalData = () => {
     const url = `${baseEndpoint}/${allDataEndpoint}`;
@@ -29,22 +26,23 @@ const getGlobalData = () => {
         .then((result) => {
             if (document.getElementById("worldCases")) {
                 document.getElementById(
-                    "worldCases"
+                    'worldCases'
                 ).innerHTML = result.cases.toLocaleString();
                 document.getElementById(
-                    "lastUpdated"
+                    'lastUpdated'
                 ).innerHTML = convertLastUpdatedToNormalizedDate(
                     result.updated
                 );
+                document.getElementById('affectedCountries').innerHTML = result.affectedCountries;
             }
-            drawChart(result.cases, result.deaths, result.active, result.recovered);
+            drawPieCharts(result.recovered, result.cases, result.active, result.deaths);
         });
 };
 
+
+
 const dataPerTopCountries = () => {
     const url = `${baseEndpoint}/${allCountriesEndpoint}desc`;
-
-    // use fetch, xmlhttprequest is ancient
     fetch(url)
         .then((response) => response.json())
         .then((results) => {
@@ -52,7 +50,6 @@ const dataPerTopCountries = () => {
                 results,
                 5
             ); // top 5
-            console.log(countriesWithMostCases);
             addCountriesWithMostCasesToHtml(countriesWithMostCases);
         });
 };
@@ -155,25 +152,46 @@ const addCountriesWithMostCasesToHtml = (countriesWithMostCases) => {
     }
 };
 
-// Draw the chart and set the chart values
-function drawChart(cases, deaths, active, recovered) {
-    var data = google.visualization.arrayToDataTable([
-        ['Information', 'World'],
+// BEGIN PIE CHART
+function drawPieCharts(recovered, cases, active, deaths) {
+    // pie chart data
+    var pieData = google.visualization.arrayToDataTable([
+        ['Types', 'Current Data'],
+        ['Recovered', recovered],
         ['Cases', cases],
-        ['Deaths', deaths],
-        ['Active Cases', active],
-        ['Recoved', recovered],
+        ['Active', active],
+        ['Deaths', deaths]
     ]);
-
-    // Optional; add a title and set the width and height of the chart
-    var options = {
-        'title': 'World Cases',
-        'text-align': center,
-        'width': 500,
-        'height': 400
+    // pie chart options
+    var pieOptions = {
+        backgroundColor: 'transparent',
+        pieHole: 0.4,
+        colors: ["olivedrab",
+            "Khaki",
+            "orange",
+            "tomato",
+            "cornflowerblue",
+            "purple",
+            "turquoise",
+            "forestgreen",
+            "navy",
+            "gray"],
+        pieSliceText: 'value',
+        tooltip: {
+            text: 'percentage'
+        },
+        fontName: 'Open Sans',
+        chartArea: {
+            width: '100%',
+            height: '94%'
+        },
+        legend: {
+            textStyle: {
+                fontSize: 13
+            }
+        }
     };
-
-    // Display the chart inside the <div> element with id="piechart"
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    chart.draw(data, options);
+    // draw pie chart
+    var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+    pieChart.draw(pieData, pieOptions);
 }
