@@ -547,6 +547,7 @@ h6 {
   #donutChart {
     margin-left: 10px;
   }
+
 }
 
 /*--------------------------------------------------------------
@@ -676,8 +677,8 @@ section {
   padding: 10px;
 }
 
-#updateTime {
+#chartDetails {
   font-size: 14px;
-  margin-left: 2em;
-  margin-bottom: 3em;
+  margin-right: 6em;
+  margin-bottom: 0.5em;
 }
