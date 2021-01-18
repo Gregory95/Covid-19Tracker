@@ -39,3 +39,14 @@ main {
     border-radius: 50%;
     box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.1);
 }
+
+
+@media (max-width: 992px),
+(max-height: 500) {
+
+    h2,
+    h5 {
+        text-align: center;
+        font-size: 14px;
+    }
+}
