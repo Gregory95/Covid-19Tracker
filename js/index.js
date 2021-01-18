@@ -74,8 +74,10 @@ const getCountryData = () => {
 
             counter++;
 
-            if (country === 'All')
+            if (country === 'All') {
+                document.getElementById("history").value = '-1';
                 img_url.src = "../assets/images/world.jpg";
+            }
             else
                 img_url.src = result.countryInfo.flag;
 
