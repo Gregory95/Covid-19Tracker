@@ -168,7 +168,7 @@ function drawChart(cases, deaths, active, recovered) {
     // Optional; add a title and set the width and height of the chart
     var options = {
         'title': 'World Cases',
-        'width': 550,
+        'text-align': center,
         'height': 400
     };
 
