@@ -11,6 +11,8 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 a {
@@ -542,7 +544,7 @@ h6 {
     line-height: 24px;
   }
 
-  #donut {
+  #donutChart {
     margin-left: 10px;
   }
 }
@@ -683,7 +685,7 @@ section {
 /*--------------------------------------------------------------
 # Donuts ection
 --------------------------------------------------------------*/
-#donut {
+#donutChart {
   padding: 60px 0;
   width: 100%;
 }
