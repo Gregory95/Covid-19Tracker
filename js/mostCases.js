@@ -169,6 +169,7 @@ function drawChart(cases, deaths, active, recovered) {
     var options = {
         'title': 'World Cases',
         'text-align': center,
+        'width': 500,
         'height': 400
     };
 
