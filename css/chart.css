@@ -44,6 +44,12 @@ main {
 @media (max-width: 992px),
 (max-height: 500) {
 
+    main {
+        width: 400px;
+        margin: 8px auto;
+        padding: 5px 10px 20px;
+    }
+
     h2,
     h5 {
         text-align: center;
