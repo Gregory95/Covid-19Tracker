@@ -51,7 +51,7 @@ main {
     }
 
     #pie-chart {
-        width: 450px;
+        width: 400px;
         height: 250px;
     }
 
@@ -59,9 +59,12 @@ main {
         display: none;
     }
 
-    h2,
-    h5 {
+    h2 {
         text-align: center;
         font-size: 14px;
+    }
+
+    h5 {
+        display: none;
     }
 }
