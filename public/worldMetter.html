@@ -54,6 +54,8 @@
 
     <div class="continents">
       <div class="loader"></div>
+      <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search for country.."
+        title="Type in a country">
       <div class="tab">
         <button id="worldButton" class="tablinks active" onclick="openContinent(event, 'apiResponse')">World
           Metter</button>
@@ -65,7 +67,7 @@
       </div>
 
       <div id="apiResponse" class="tabcontent">
-        <table id="dataTable">
+        <table class="sortable" id="dataTable" style="overflow-x:auto;">
           <thead>
             <tr>
               <th>Country</th>
@@ -124,6 +126,8 @@
 </script>
 <script src="/js/dateTime.js"></script>
 <script src="/js/openContinents.js"></script>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script src="/js/filterTable.js"></script>
 <script src="/js/getAllCountries.js"></script>
 <!-- Vendor JS Files -->
 <script src="/vendor/jquery/jquery.min.js"></script>

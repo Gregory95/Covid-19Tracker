@@ -65,7 +65,6 @@ body {
 /* Style the tab */
 
 .tab {
-    overflow: hidden;
     border: 1px solid rgb(240, 241, 239);
     background-color: #061301;
     width: 100%;
@@ -110,6 +109,7 @@ body {
     border: 1px solid #ccc;
     border-top: none;
     width: 100%;
+    background-color: inherit;
 }
 
 table {
@@ -122,9 +122,28 @@ table {
     color: black;
 }
 
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
 th {
     text-align: left;
     padding: 15px;
+    cursor: pointer;
+}
+
+th:hover {
+    color: white;
+    background-color: black;
+    transition: 0.3s;
+    opacity: 0.5;
 }
 
 td {
