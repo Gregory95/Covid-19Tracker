@@ -1,9 +1,9 @@
 "use strict";
 
-const baseEndpoint = "https://corona.lmao.ninja";
-const allCountriesEndpoint = "v2/countries?sort="; //sort query parameter -> desc or asc
-const continentsEndpoint = "v2/continents";
-const allDataEndpoint = "v2/all";
+const baseEndpoint = "https://disease.sh/v3/covid-19";
+const allCountriesEndpoint = "countries?sort="; //sort query parameter -> desc or asc
+const continentsEndpoint = "continents";
+const allDataEndpoint = "all";
 
 google.load("visualization", "1", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(drawPieCharts);

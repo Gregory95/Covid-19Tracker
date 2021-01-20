@@ -1,13 +1,13 @@
 "use strict";
 
 //Novel Covid-19 APIs
-const baseEndpoint = 'https://corona.lmao.ninja';
-const getAllData = 'v2/all';
-const getAllCountries = 'v2/countries?sort='; //sort query parameter -> desc or asc
-const getSingleCountry = 'v2/countries'; ///v2/countries/:country add country name at the end
-const getUnitedStatesOfAmerica = 'v2/states';
-const getHOpkinsCSSE = 'v2/jhucsse';
-const getHistory = 'v2/historical'; //v2/historical/:country get history of specific country
+const baseEndpoint = 'https://disease.sh/v3/covid-19';
+const getAllData = 'all';
+const getAllCountries = 'countries?sort='; //sort query parameter -> desc or asc
+const getSingleCountry = 'countries'; ///v2/countries/:country add country name at the end
+const getUnitedStatesOfAmerica = 'states';
+const getHOpkinsCSSE = 'jhucsse';
+const getHistory = 'historical'; //v2/historical/:country get history of specific country
 
 
 
