@@ -123,7 +123,7 @@ const getHistoricalDataByCountry = (country) => {
         .catch((err) => {
             console.error(err);
             clearTable();
-            alert("Something went wrong.");
+            alert("System could not find information about " + country + " for last " + days + " days");
         })
         .then((result) => {
 
@@ -141,7 +141,7 @@ const getHistoricalDataByCountry = (country) => {
         .catch((err) => {
             console.error(err);
             clearTable();
-            alert("System could not find information about " + country + " for last " + days + " days");
+            alert("Something went wrong.");
         })
 
 }
@@ -157,7 +157,7 @@ const addCountryToHtml = (country) => {
     document.getElementById("deathsToday").innerHTML = "+" + country.todayDeaths.toLocaleString();
     document.getElementById("casesToday").innerHTML = "+" + country.todayCases.toLocaleString();
     document.getElementById("tests").innerHTML = country.tests.toLocaleString();
-    document.getElementById("updateTime").innerHTML = convertLastUpdatedToNormalizedDate(country.updated)
+    document.getElementById("updateTime").innerHTML = convertLastUpdatedToNormalizedDate(country.updated);
 
 };
 

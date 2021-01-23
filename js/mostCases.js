@@ -55,15 +55,20 @@ const dataPerTopCountries = () => {
 };
 
 const updateCasesPerContinentView = (results) => {
+
     const continentMapper = {
         America: "americaCases",
         Africa: "africaCases",
         Europe: "europeCases",
         Asia: "asiaCases",
+        Oceania: "oceaniaCases"
     };
 
     const isAmerica = (result) =>
         ["North America", "South America"].includes(result.continent);
+
+    const isOceania = (result) =>
+        ["Australia/Oceania"].includes(result.continent);
 
     // north and south america should be 1 number, sum up their cases
     const americaCases = results
@@ -71,18 +76,30 @@ const updateCasesPerContinentView = (results) => {
         .map((result) => result.cases)
         .reduce((a, b) => a + b);
 
+    const oceaniaCases = results
+        .filter((result) => isOceania(result))
+        .map((result) => result.cases)
+        .reduce((a, b) => a + b);
+
     // remove south/north america
     let filteredResults = results.filter((r) => !isAmerica(r));
+
+    // remove australia/oceania
+    filteredResults = results.filter((r) => !isOceania(r));
+
 
     // and add a new "entry" to the results, so we can use the mapping technique consistently
     // without hacky if checks and so on
     filteredResults.push({
         cases: americaCases,
         continent: "America",
-    });
+    },
+        {
+            cases: oceaniaCases,
+            continent: "Oceania",
+        });
 
-    // update the dom
-    // oceania is missing, this must be wrong though
+
     for (const result of filteredResults) {
         const divId = continentMapper[result.continent];
 
@@ -105,7 +122,6 @@ const dataPerContinent = () => {
         })
         .catch((err) => {
             console.error(err);
-            // todo add alert could not fetch data
             alert(response.statusCode + "Error: System could not retrieve data.");
         });
 };

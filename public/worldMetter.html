@@ -54,7 +54,7 @@
 
     <div class="continents">
       <div class="loader"></div>
-      <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search for country.."
+      <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search a country..."
         title="Type in a country">
       <div class="tab">
         <button id="worldButton" class="tablinks active" onclick="openContinent(event, 'apiResponse')">World
@@ -63,7 +63,8 @@
         <button id="asiaButton" class="tablinks" onclick="openContinent(event, 'apiResponse')">Asia</button>
         <button id="americaButton" class="tablinks" onclick="openContinent(event, 'apiResponse')">America</button>
         <button id="africaButton" class="tablinks" onclick="openContinent(event, 'apiResponse')">Africa</button>
-        <button id="otherButton" class="tablinks" onclick="openContinent(event, 'apiResponse')">Other</button>
+        <button id="oceaniaButton" class="tablinks"
+          onclick="openContinent(event, 'apiResponse')">Australia/Oceania</button>
       </div>
 
       <div id="apiResponse" class="tabcontent">

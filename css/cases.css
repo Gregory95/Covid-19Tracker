@@ -62,7 +62,7 @@ body {
 #country2:hover {
     transition: 0.3s;
     color: black;
-    background-color:inherit;
+    background-color: inherit;
 }
 
 #country2:focus {
@@ -85,7 +85,7 @@ body {
 #history:hover {
     transition: 0.3s;
     color: black;
-    background-color:inherit;
+    background-color: inherit;
 
 }
 
@@ -207,7 +207,8 @@ footer {
         margin-left: 1em;
         width: 300px;
     }
-    #history{
+
+    #history {
         width: 300px;
     }
 

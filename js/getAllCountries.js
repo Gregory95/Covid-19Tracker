@@ -13,7 +13,7 @@ var eurButton = document.querySelector("#europeButton");
 var asiaButton = document.querySelector("#asiaButton");
 var americaButton = document.querySelector("#americaButton");
 var africaButton = document.querySelector("#africaButton")
-var otherButton = document.querySelector("#otherButton");
+var oceaniaButton = document.querySelector("#oceaniaButton");
 
 
 
@@ -27,7 +27,7 @@ americaButton.addEventListener("click", callAmerica);
 
 africaButton.addEventListener("click", callAfrica);
 
-otherButton.addEventListener("click", callOther);
+oceaniaButton.addEventListener("click", callOceania);
 
 
 function callWorld() {
@@ -50,8 +50,8 @@ function callAmerica() {
     document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getAmericaCountries();
 }
 
-function callOther() {
-    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getOtherCountries();
+function callOceania() {
+    document.getElementById("apiResponse").getElementsByTagName("tbody").innerHTML = getOceaniaCountries();
 }
 
 
@@ -260,15 +260,15 @@ const getAfricanCountries = () => {
 }
 
 
-//Retrieve all the Other Countries
-const getOtherCountries = () => {
+//Retrieve all the oceania Countries
+const getOceaniaCountries = () => {
     const url = `${baseEndpoint}/${getAllCountries}desc`;
 
     $('#continent tr').remove();
 
     $('.loader').show();
 
-    var otherCountriesCollection = [];
+    var oceaniaCountriesCollection = [];
 
     fetch(url)
         .then((response) => response.json())
@@ -279,16 +279,16 @@ const getOtherCountries = () => {
         .then((result) => {
             $('.loader').hide();
             for (var i = 0; i < result.length; i++) {
-                if (result[i].continent != "Europe" && result[i].continent != "Africa" && result[i].continent != "South America" && result[i].continent != "North America" && result[i].continent != "Asia") {
-                    otherCountriesCollection.push(result[i]);
+                if (result[i].continent === "Australia/Oceania") {
+                    oceaniaCountriesCollection.push(result[i]);
                 }
             }
 
-            generateTableRows(otherCountriesCollection.length);
+            generateTableRows(oceaniaCountriesCollection.length);
 
             const contriesOfContinent = getCountriesPerContinentDetails(
-                otherCountriesCollection,
-                otherCountriesCollection.length
+                oceaniaCountriesCollection,
+                oceaniaCountriesCollection.length
             );
 
             addCountriesOfEachContinentToHtml(contriesOfContinent);

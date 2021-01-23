@@ -133,7 +133,7 @@ const countries = [
     "Lithuania",
     "Luxembourg",
     "Macau",
-    "Macedonia, Former Yugoslav Republic of",
+    "North Macedonia, Former Republic of Skopjie",
     "Madagascar",
     "Malawi",
     "Malaysia",
@@ -257,7 +257,7 @@ const continents = [
     "Asia",
     "Africa",
     "America",
-    "Other"
+    "Oceania"
 ];
 
 const history = [

@@ -1,3 +1,5 @@
+"use strict"
+
 let api_result = new Array();
 
 const generateTableHead = (table, data) => {
