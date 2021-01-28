@@ -116,6 +116,8 @@ const getEuropeanCountries = () => {
             $('.loader').hide();
             for (var i = 0; i < result.length; i++) {
                 if ((result[i].continent === "Europe" || result[i].country === "Cyprus") && result[i].country != "Russia") {
+                    if (result[i].country === "Macedonia")
+                        result[i].country = "North Macedonia";
                     europeCountriesCollection.push(result[i]);
                 }
             }
