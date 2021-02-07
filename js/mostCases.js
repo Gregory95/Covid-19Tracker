@@ -181,7 +181,7 @@ function drawPieCharts(recovered, cases, active, deaths) {
     // pie chart options
     var pieOptions = {
         backgroundColor: 'transparent',
-        pieHole: 0.4,
+        pieHole: 0.3,
         colors: ["olivedrab",
             "Khaki",
             "orange",
