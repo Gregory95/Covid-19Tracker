@@ -133,6 +133,7 @@ body {
 
 table {
     margin-top: 50px;
+    margin-bottom: 100px;
     width: 70%;
     padding: 5px;
     background-color: white;
@@ -182,6 +183,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
+    margin-top: 10em;
     height: 40px;
     width: 100%;
     color: white;
