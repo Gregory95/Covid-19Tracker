@@ -5,9 +5,6 @@ const allCountriesEndpoint = "countries?sort="; //sort query parameter -> desc o
 const continentsEndpoint = "continents";
 const allDataEndpoint = "all";
 
-google.load("visualization", "1", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(drawPieCharts);
-
 window.onload = () => {
     getGlobalData();
     dataPerContinent();
@@ -143,7 +140,7 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
         .splice(0, limit)
         .map((item, index) => {
             return {
-                name: item.country,
+                name: item.country == "USA" ? "United States of America" : item.country == "UK" ? "United Kingdom" : item.country,
                 number: item.cases.toLocaleString(),
                 deaths: item.deaths.toLocaleString(),
                 recovered: item.recovered.toLocaleString(),
@@ -167,47 +164,3 @@ const addCountriesWithMostCasesToHtml = (countriesWithMostCases) => {
         }
     }
 };
-
-// BEGIN PIE CHART
-function drawPieCharts(recovered, cases, active, deaths) {
-    // pie chart data
-    var pieData = google.visualization.arrayToDataTable([
-        ['Types', 'Current Data'],
-        ['Recovered', recovered],
-        ['Cases', cases],
-        ['Active', active],
-        ['Deaths', deaths]
-    ]);
-    // pie chart options
-    var pieOptions = {
-        backgroundColor: 'transparent',
-        pieHole: 0.3,
-        colors: ["olivedrab",
-            "Khaki",
-            "orange",
-            "tomato",
-            "cornflowerblue",
-            "purple",
-            "turquoise",
-            "forestgreen",
-            "navy",
-            "gray"],
-        pieSliceText: 'value',
-        tooltip: {
-            text: 'percentage'
-        },
-        fontName: 'Open Sans',
-        chartArea: {
-            width: '100%',
-            height: '94%'
-        },
-        legend: {
-            textStyle: {
-                fontSize: 13
-            }
-        }
-    };
-    // draw pie chart
-    var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
-    pieChart.draw(pieData, pieOptions);
-}
