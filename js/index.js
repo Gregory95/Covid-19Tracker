@@ -34,7 +34,7 @@ function initMap(lat, long) {
     const uluru = { lat: lat, lng: long };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 3,
+        zoom: 4,
         center: uluru,
     });
     // The marker, positioned at Uluru
@@ -65,9 +65,6 @@ function reverseGeocodingWithGoogle(latitude, longitude) {
     const geoLocationUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${openCageKey}`;
     fetch(geoLocationUrl)
         .then(res => res.json())
-        .then(response => {
-            console.log("User's Location Info: ", response)
-        })
         .catch(status => {
             console.log('Request failed.  Returned status of', status)
         })
