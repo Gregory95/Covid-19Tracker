@@ -9,7 +9,6 @@ const getUnitedStatesOfAmerica = 'states';
 const getHOpkinsCSSE = 'jhucsse';
 const getHistory = 'historical'; //v2/historical/:country get history of specific country
 const getCountriesLatitudes = 'https://corona.lmao.ninja/v2/jhucsse';
-const googleKey = 'AIzaSyAzSD_d5Wl9xCG2ReUf00j62E7EzHNqtpU';
 const openCageKey = '44229c16f0a44ceeb93cf52c78233b82';
 
 
