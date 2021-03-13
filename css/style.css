@@ -695,6 +695,10 @@ section {
   padding: 10px;
 }
 
+.table th {
+  font-size: 18px;
+}
+
 #chartDetails {
   font-size: 14px;
   margin-right: 6em;

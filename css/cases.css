@@ -3,6 +3,7 @@ body {
     background-image: no-repeat;
     color: white;
     font-family: "Lato", sans-serif;
+    overflow-x: hidden;
 }
 
 .main-page {
@@ -12,6 +13,13 @@ body {
 .main-page h1 {
     text-align: center;
     color: #124265;
+}
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
 }
 
 #liveDateTime {
@@ -126,13 +134,14 @@ body {
 
 #content-right {
     float: right;
-    width: 35%;
-    margin-right: 10px;
+    width: 45%;
+    margin-right: 20px;
     margin-top: 50px;
 }
 
 table {
     margin-top: 50px;
+    margin-bottom: 100px;
     width: 70%;
     padding: 5px;
     background-color: white;
@@ -182,6 +191,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
+    margin-top: 10em;
     height: 40px;
     width: 100%;
     color: white;
@@ -231,7 +241,7 @@ footer {
     }
 
     #content-right {
-        float: left;
+        width: 100%;
     }
 
     #flag {

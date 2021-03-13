@@ -8,24 +8,76 @@ const getSingleCountry = 'countries'; ///v2/countries/:country add country name 
 const getUnitedStatesOfAmerica = 'states';
 const getHOpkinsCSSE = 'jhucsse';
 const getHistory = 'historical'; //v2/historical/:country get history of specific country
-
+const getCountriesLatitudes = 'https://corona.lmao.ninja/v2/jhucsse';
+const googleKey = 'AIzaSyAzSD_d5Wl9xCG2ReUf00j62E7EzHNqtpU';
+const openCageKey = '44229c16f0a44ceeb93cf52c78233b82';
 
 
 //counter helps me to keep one flag image on the screen at a time.
 var counter = 0;
 
-document.getElementById("flag").style.display = "none";
+// document.getElementById("flag").style.display = "none";
 document.getElementById("content-left").style.display = "none";
 
 document.getElementById("runApi").onclick = function setup() {
 
-    document.getElementById("content-left").style.display = "block";
+    document.getElementById("content-left").style.display = "flex";
     getCountryData()
 };
+
+window.onload = () => {
+    geoFindMe();
+}
+
+// Initialize and add the map
+function initMap(lat, long) {
+    // The location of Uluru
+    const uluru = { lat: lat, lng: long };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 3,
+        center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+    });
+}
+
+function geoFindMe() {
+    if (!navigator.geolocation) {
+        console.log("Geolocation is not supported by your browser");
+        return;
+    }
+    function success(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        initMap(latitude, longitude)
+        reverseGeocodingWithGoogle(longitude, latitude)
+    }
+    function error() {
+        console.log("Unable to retrieve your location");
+    }
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function reverseGeocodingWithGoogle(latitude, longitude) {
+    const geoLocationUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${openCageKey}`;
+    fetch(geoLocationUrl)
+        .then(res => res.json())
+        .then(response => {
+            console.log("User's Location Info: ", response)
+        })
+        .catch(status => {
+            console.log('Request failed.  Returned status of', status)
+        })
+}
+
 //a function that returns information of covid-19 for a specific country that a user chooses.
 const getCountryData = () => {
 
-    document.getElementById("flag").style.display = "none";
+    // document.getElementById("flag").style.display = "none";
 
     let url = "";
     var img_url = new Image();
@@ -57,34 +109,15 @@ const getCountryData = () => {
         })
         .then((result) => {
 
+            getCountriesLatAndLong(country);
             /*Left content of the page*/
-            document.getElementById("flag").style.display = "none";
+            // document.getElementById("flag").style.display = "none";
 
             addCountryToHtml(result);
             if (days != "-1" && country != "All")
                 getHistoricalDataByCountry(country);
 
-            document.getElementById("flag").style.display = "block";
-
-
-            /*Right content of the page*/
-            if (counter < 1) {
-                document.getElementById("flag").appendChild(img_url);
-            }
-
             counter++;
-
-            if (country === 'All') {
-                document.getElementById("history").value = '-1';
-                img_url.src = "../assets/images/world.jpg";
-            }
-            else
-                img_url.src = result.countryInfo.flag;
-
-            img_url.setAttribute('id', 'img_flag');
-            img_url.setAttribute('width', '250px');
-            img_url.setAttribute('height', '200px');
-            document.getElementById("img_flag").src = img_url.src;
 
         }).catch((err) => {
             console.error(err);
@@ -143,8 +176,52 @@ const getHistoricalDataByCountry = (country) => {
             clearTable();
             alert("Something went wrong.");
         })
-
 }
+
+const getCountriesLatAndLong = (country) => {
+    console.log(country);
+    const countriesUrl = `${getCountriesLatitudes}`;
+    var coortinatesArr = [];
+    var coordinates =
+    {
+        latitude: '',
+        longtitue: '',
+        country: ''
+    }
+
+    console.log(countriesUrl);
+    fetch(countriesUrl)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+        })
+        .then((result) => {
+            for (var i = 0; i < result.length; i++) {
+                coordinates = {
+                    latitude: result[i].coordinates.latitude,
+                    longitude: result[i].coordinates.longitude,
+                    country: result[i].country
+                }
+                coortinatesArr.push(coordinates);
+            }
+
+            for (var i = 0; i < coortinatesArr.length; i++) {
+                if (country === "USA") {
+                    initMap(47.751076, -120.740135);
+                    break;
+                }
+                if (coortinatesArr[i].country === country && (coortinatesArr[i].latitude != "" && coortinatesArr[i].longitude != "")) {
+                    initMap(parseFloat(coortinatesArr[i].latitude), parseFloat(coortinatesArr[i].longitude));
+                    break;
+                }
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            clearTable();
+            alert("Something went wrong.");
+        })
+};
 
 
 const addCountryToHtml = (country) => {

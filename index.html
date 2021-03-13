@@ -39,7 +39,6 @@
   <!-- <link href="/vendor/aos/aos.css" rel="stylesheet" /> -->
 
   <!-- Template Main CSS File -->
-  <link href="css/chart.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
 </head>
 
@@ -73,9 +72,9 @@
           <h2></h2>
         </div>
       </div>
-      <div class="text-center">
+      <!-- <div class="text-center">
         <a href="public/worldMetter.html" class="btn-get-started scrollto">Get Started</a>
-      </div>
+      </div> -->
 
       <div class="row icon-boxes">
         <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
@@ -142,7 +141,7 @@
   <br id="main" />
 
   <!-- ====== Donut chart section =====-->
-  <section id="donutChart">
+  <!-- <section id="donutChart">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row">
         <main>
@@ -157,55 +156,64 @@
         </main>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ====== End Donut chart section =====-->
 
   <!-- ======= Counts Section ======= -->
-  <section id=" counts" class="counts section-bg">
-    <div class="container">
+  <section id="counts" class="counts section-bg">
+    <div class="container" data-aos="fade-up">
       <div class="row justify-content-end">
-        <div class="col-lg-12 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="worldCases"></span>
-            <p>World Cases</p>
-          </div>
-        </div>
-        <hr style="width:100%;">
-
-        <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="europeCases"></span>
-            <p>Europe`s Cases</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="americaCases"></span>
-            <p>America`s Cases</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="asiaCases"></span>
-            <p>Asia`s Cases</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="africaCases"></span>
-            <p>Africa`s Cases</p>
-          </div>
-        </div>
-        <hr style="width:100%;">
-        <div class="col-lg-12 col-md-5 col-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <span id="oceaniaCases"></span>
-            <p>Australia/Oceania`s Cases</p>
-          </div>
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th>Continent</th>
+              <th>Represantation</th>
+              <th>Total Cases</th>
+            </tr>
+            <tr>
+              <th id="Europe">Europe</th>
+              <td>
+                <img id="europe" alt="europeCases" src="/assets/img/european-union.png" width="50" height="50" />
+              </td>
+              <td id="europeCases"></td>
+            </tr>
+            <tr>
+              <th id="America">America</th>
+              <td>
+                <img id="america" alt="americaCases" src="/assets/img/america.png" width="50" height="50" />
+              </td>
+              <td id="americaCases"></td>
+            </tr>
+            <tr>
+              <th id="Asia">Asia</th>
+              <td>
+                <img id="asia" alt="asiaCases" src="/assets/img/asia.png" width="50" height="50" />
+              </td>
+              <td id="asiaCases"></td>
+            </tr>
+            <tr>
+              <th id="Africa">Africa</th>
+              <td>
+                <img id="africa" alt="africaCases" src="/assets/img/africa.png" width="50" height="50" />
+              </td>
+              <td id="africaCases"></td>
+            </tr>
+            <tr>
+              <th id="Oceania">Oceania</th>
+              <td>
+                <img id="oceania" alt="oceaniaCases" src="/assets/img/australia.png" width="50" height="50" />
+              </td>
+              <td id="oceaniaCases"></td>
+            </tr>
+            <tr>
+              <th id="World">World</th>
+              <td>
+                <img id="world" alt="worldCases" src="assets/img/worldwide.png" width="50" height="50" />
+              </td>
+              <td id="worldCases"></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -309,7 +317,7 @@
             before the outbreak began in Wuhan, China, in December 2019.
             COVID-19 is now a pandemic...
           </p>
-          <a href="public/about.html" class="btn-learn-more">Learn More</a>
+          <a href="public/information.html" class="btn-learn-more">Learn More</a>
         </div>
       </div>
     </div>
