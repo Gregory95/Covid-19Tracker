@@ -52,7 +52,7 @@ function geoFindMe() {
     function success(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        initMap(latitude, longitude)
+        initMap(parseFloat(latitude), parseFloat(longitude))
         reverseGeocodingWithGoogle(longitude, latitude)
     }
     function error() {
