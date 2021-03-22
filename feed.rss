@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Covid 19 Tracker</title>
+		<link><![CDATA[https://covnews.netlify.app]]></link>
+		<description>Covid-19 Cases Tracker</description>
+		<language>en</language>
+		<pubDate>Mon, 22 Mar 2021 21:19:53 +0200</pubDate>
+		<generator>MySitemapGenerator (www.mysitemapgenerator.com)</generator>
+
+		<item>
+			<guid isPermaLink="false">3415662372</guid>
+			<title>Covid-19 Live Data</title>
+			<link>https://covnews.netlify.app/public/singlecountrycases</link>
+			<dc:creator>Administrator</dc:creator>
+			<category>Site News</category>
+			<pubDate>Mon, 22 Mar 2021 21:19:54 +0200</pubDate>
+		</item>
+		<item>
+			<guid isPermaLink="false">1600301220</guid>
+			<title>World Covid-19 Cases</title>
+			<link>https://covnews.netlify.app/public/worldmetter</link>
+			<dc:creator>Administrator</dc:creator>
+			<category>Site News</category>
+			<pubDate>Mon, 22 Mar 2021 21:19:54 +0200</pubDate>
+		</item>
+		<item>
+			<guid isPermaLink="false">3834775174</guid>
+			<title>Q&amp;A on coronaviruses (COVID-19)</title>
+			<link>https://covnews.netlify.app/public/information.html</link>
+			<dc:creator>Administrator</dc:creator>
+			<category>Site News</category>
+			<pubDate>Mon, 22 Mar 2021 21:19:55 +0200</pubDate>
+		</item>
+		<item>
+			<guid isPermaLink="false">1882764784</guid>
+			<title>Covid 19 Tracker</title>
+			<link>https://covnews.netlify.app/index.html</link>
+			<dc:creator>Administrator</dc:creator>
+			<category>Site News</category>
+			<description>Covid-19 Cases Tracker</description>
+			<pubDate>Mon, 22 Mar 2021 21:19:55 +0200</pubDate>
+		</item>
+	</channel>
+</rss>
