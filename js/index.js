@@ -203,13 +203,18 @@ const getCountriesLatAndLong = (country) => {
 
             for (var i = 0; i < coortinatesArr.length; i++) {
                 if (country === "USA") {
-                    initMap(47.751076, -120.740135);
+                    initMap(41.500000, -100.000000);
                     break;
                 }
-                if (coortinatesArr[i].country === country && (coortinatesArr[i].latitude != "" && coortinatesArr[i].longitude != "")) {
+                else if (country === "United Kingdom") {
+                    initMap(51.5074, 0.1278);
+                    break;
+                }
+                else if (coortinatesArr[i].country === country && (coortinatesArr[i].latitude != "" && coortinatesArr[i].longitude != "")) {
                     initMap(parseFloat(coortinatesArr[i].latitude), parseFloat(coortinatesArr[i].longitude));
                     break;
                 }
+                else break;
             }
         })
         .catch((err) => {
