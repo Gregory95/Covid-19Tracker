@@ -247,6 +247,10 @@ footer {
         margin-left: 1px;
     }
 
+    #map {
+        margin-bottom: 50px;
+    }
+
     #flag {
         margin-bottom: 100px;
         margin-left: 1em;

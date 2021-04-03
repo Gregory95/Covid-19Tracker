@@ -6,6 +6,8 @@ const getAllData = 'all';
 const getAllCountries = 'countries?sort='; //sort query parameter -> desc or asc
 const getSingleCountry = 'countries'; ///v2/countries/:country add country name at the end
 const getUnitedStatesOfAmerica = 'states';
+const getVaccineDataForEachCountry = 'vaccine/coverage/countries';
+const getWorldVaccinations = 'vaccine/coverage';
 const getHOpkinsCSSE = 'jhucsse';
 const getHistory = 'historical'; //v2/historical/:country get history of specific country
 const getCountriesLatitudes = 'https://corona.lmao.ninja/v2/jhucsse';
@@ -22,6 +24,7 @@ document.getElementById("runApi").onclick = function setup() {
 
     document.getElementById("content-left").style.display = "flex";
     getCountryData()
+    getVaccineData()
 };
 
 window.onload = () => {
@@ -70,6 +73,80 @@ function reverseGeocodingWithGoogle(latitude, longitude) {
         })
 }
 
+//a functio that returnes information about vaccines completed in each country
+const getVaccineData = () => {
+    let url = "";
+    let country = document.getElementById("country2").value.trim();
+
+    var vacData = `${baseEndpoint}/${getVaccineDataForEachCountry}/${country}`;
+    var vacDataWorldWide = `${baseEndpoint}/${getWorldVaccinations}`;
+
+    if (country === "All") {
+        url = vacDataWorldWide;
+        document.getElementById("history").disabled = true;
+    } else if (country === '-1') {
+        clearTable();
+        alert("\n" + "Please select a country!");
+        document.getElementById("content-left").style.display = "none";
+    } else {
+        url = vacData;
+        document.getElementById("history").disabled = false;
+    }
+
+    fetch(url)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            clearTable();
+            document.getElementById("content-left").style.display = "none";
+        })
+        .then((result) => {
+
+            if (url != vacDataWorldWide) {
+                let size = 0;
+                let timeline = Object.keys(result.timeline);
+                let latestVaccinations = 0;
+
+                for (let item in timeline) {
+                    size++;
+                }
+
+                for (let item in result.timeline) {
+                    let i = 0;
+                    if (item == timeline[size - 1])
+                        latestVaccinations = result.timeline[item];
+                    i++;
+                }
+
+                document.getElementById("vaccinated").innerHTML = latestVaccinations.toLocaleString();
+            }
+            else {
+                let size = 0;
+                let timeline = Object.keys(result);
+                let latestVaccinations = 0;
+
+                for (let item in result) {
+                    size++;
+                }
+
+                for (const [key, value] of Object.entries(result)) {
+                    let i = 0;
+                    if (`${key}` == timeline[size - 1])
+                        latestVaccinations = `${value}`;
+                    i++;
+                }
+                document.getElementById("vaccinated").innerHTML = numberWithCommas(latestVaccinations);
+            }
+
+        }).catch((err) => {
+            console.error(err);
+            clearTable();
+            document.getElementById("content-left").style.display = "none";
+            alert("Information about " + country + " are not available.");
+        });
+}
+
+
 //a function that returns information of covid-19 for a specific country that a user chooses.
 const getCountryData = () => {
 
@@ -110,8 +187,10 @@ const getCountryData = () => {
             // document.getElementById("flag").style.display = "none";
 
             addCountryToHtml(result);
-            if (days != "-1" && country != "All")
+            if (days != "-1" && country != "All") {
                 getHistoricalDataByCountry(country);
+                getHistoricalVaccinationDataByCountry(country);
+            }
 
             counter++;
 
@@ -166,6 +245,72 @@ const getHistoricalDataByCountry = (country) => {
 
             addHistoricalDataToHtml(historyObject);
 
+        })
+        .catch((err) => {
+            console.error(err);
+            clearTable();
+            alert("Something went wrong.");
+        })
+}
+
+const getHistoricalVaccinationDataByCountry = (country) => {
+
+    let historyOption = document.getElementById("history").value;
+
+    let days = 0;
+    if (historyOption === "Yesterday")
+        days = 1;
+    else if (historyOption === "Last week")
+        days = 7;
+    else if (historyOption === "Last 15 days")
+        days = 15;
+    else if (historyOption === "Last month")
+        days = 30;
+    else
+        days = 0;
+
+    var historicalVaccineDataByCountryAndDays = `${baseEndpoint}/${getVaccineDataForEachCountry}/${country}`;
+
+    fetch(historicalVaccineDataByCountryAndDays)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.error(err);
+            clearTable();
+            alert("System could not find information about " + country + " for last " + days + " days");
+        })
+        .then((result) => {
+
+            $('.loader').hide();
+            var timeline = Object.keys(result.timeline);
+            let latestVaccinations = 0;
+            var item;
+
+            if (days === 1) {
+                item = timeline[28];
+                latestVaccinations = result.timeline[item];
+            }
+
+            else if (days === 7) {
+                item = timeline[7];
+                latestVaccinations = result.timeline[item];
+            }
+            else if (days === 15) {
+                item = timeline[15];
+                latestVaccinations = result.timeline[item];
+            }
+            else if (days === 30) {
+                item = timeline[0];
+                latestVaccinations = result.timeline[item];
+            }
+            else
+                latestVaccinations = 0;
+
+            if (latestVaccinations === 0) {
+                document.getElementById("vaccinated").innerHTML = 'No Vaccination Data Found';
+            }
+            else {
+                document.getElementById("vaccinated").innerHTML = numberWithCommas(latestVaccinations.toString());
+            }
         })
         .catch((err) => {
             console.error(err);
@@ -267,9 +412,15 @@ const clearTable = () => {
     document.getElementById("totalCases").innerHTML = "";
     document.getElementById("totalDeaths").innerHTML = "";
     document.getElementById("activeCases").innerHTML = "";
+    document.getElementById("vaccinated").innerHTML = "";
     document.getElementById("recovered").innerHTML = "";
     document.getElementById("deathsToday").innerHTML = "";
     document.getElementById("casesToday").innerHTML = "";
     document.getElementById("tests").innerHTML = "";
     document.getElementById("updateTime").innerHTML = "";
+}
+
+//helper
+const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

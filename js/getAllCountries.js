@@ -128,7 +128,6 @@ const getEuropeanCountries = () => {
                 europeCountriesCollection,
                 europeCountriesCollection.length
             );
-            console.log(contriesOfContinent);
 
             addCountriesOfEachContinentToHtml(contriesOfContinent);
 
