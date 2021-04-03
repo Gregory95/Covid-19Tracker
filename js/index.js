@@ -291,7 +291,7 @@ const getHistoricalVaccinationDataByCountry = (country) => {
             }
 
             else if (days === 7) {
-                item = timeline[7];
+                item = timeline[23];
                 latestVaccinations = result.timeline[item];
             }
             else if (days === 15) {
