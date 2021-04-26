@@ -77,7 +77,7 @@ function reverseGeocodingWithGoogle(latitude, longitude) {
 const getVaccineData = () => {
     let url = "";
     let country = document.getElementById("country2").value.trim();
-
+    if (country === "United Kingdom") country = 'UK';
     var vacData = `${baseEndpoint}/${getVaccineDataForEachCountry}/${country}`;
     var vacDataWorldWide = `${baseEndpoint}/${getWorldVaccinations}`;
 
@@ -158,6 +158,8 @@ const getCountryData = () => {
     let country = document.getElementById("country2").value.trim();
     let days = document.getElementById("history").value.trim();
 
+    if (country === "United Kingdom") country = 'UK';
+
     var singleCountryUrl = `${baseEndpoint}/${getSingleCountry}/${country}`;
     const getAllDataUrl = `${baseEndpoint}/${getAllData}`;
 
@@ -181,7 +183,7 @@ const getCountryData = () => {
             document.getElementById("content-left").style.display = "none";
         })
         .then((result) => {
-
+            if (country === 'UK') country = 'United Kingdom';
             getCountriesLatAndLong(country);
             /*Left content of the page*/
             // document.getElementById("flag").style.display = "none";
@@ -256,6 +258,7 @@ const getHistoricalDataByCountry = (country) => {
 const getHistoricalVaccinationDataByCountry = (country) => {
 
     let historyOption = document.getElementById("history").value;
+    if (country === "United Kingdom") country = 'UK';
 
     let days = 0;
     if (historyOption === "Yesterday")
@@ -330,7 +333,6 @@ const getCountriesLatAndLong = (country) => {
         country: ''
     }
 
-    console.log(countriesUrl);
     fetch(countriesUrl)
         .then((response) => response.json())
         .catch((err) => {
