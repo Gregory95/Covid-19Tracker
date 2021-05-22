@@ -65,7 +65,7 @@ const updateCasesPerContinentView = (results) => {
         ["North America", "South America"].includes(result.continent);
 
     const isOceania = (result) =>
-        ["Australia/Oceania"].includes(result.continent);
+        ["Australia-Oceania"].includes(result.continent);
 
     // north and south america should be 1 number, sum up their cases
     const americaCases = results
