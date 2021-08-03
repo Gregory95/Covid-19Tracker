@@ -280,7 +280,7 @@ const getOceaniaCountries = () => {
         .then((result) => {
             $('.loader').hide();
             for (var i = 0; i < result.length; i++) {
-                if (result[i].continent === "Australia/Oceania") {
+                if (result[i].continent === "Australia-Oceania") {
                     oceaniaCountriesCollection.push(result[i]);
                 }
             }
