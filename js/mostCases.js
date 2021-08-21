@@ -140,7 +140,7 @@ const getCountriesWithMostCases = (casesPerCountyCollection, limit) => {
         .splice(0, limit)
         .map((item, index) => {
             return {
-                name: item.country == "USA" ? "United States of America" : item.country == "UK" ? "United Kingdom" : item.country,
+                name: item.country == "UK" ? "United Kingdom" : item.country,
                 number: item.cases.toLocaleString(),
                 deaths: item.deaths.toLocaleString(),
                 recovered: item.recovered.toLocaleString(),

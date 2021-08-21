@@ -47,16 +47,18 @@ body {
 
 #dropdown {
     display: inline-block;
-    margin-top: 2%;
-    margin-left: 2rem;
+    margin-top: 20px;
+    margin-left: 35%;
+    margin-right: 50%;
 }
+
 
 #dropdown:focus {
     outline: none;
     box-shadow: none;
 }
 
-#country2 {
+#countryList {
     border-radius: 4px;
     background: #229bdc;
     color: white;
@@ -67,13 +69,13 @@ body {
     cursor: pointer;
 }
 
-#country2:hover {
+#countryList:hover {
     transition: 0.3s;
     color: black;
     background-color: inherit;
 }
 
-#country2:focus {
+#countryList:focus {
     outline: none;
     box-shadow: none;
 }
@@ -110,7 +112,7 @@ body {
     padding: 12px 20px;
     font-weight: 700;
     font-size: 13px;
-    margin-left: 0rem;
+    margin-left: 35%;
     margin-top: 1em;
     cursor: pointer;
 }
@@ -148,6 +150,10 @@ table {
     color: black;
 }
 
+tr {
+    width: 25%;
+}
+
 th {
     text-align: left;
     padding: 15px;
@@ -155,22 +161,33 @@ th {
 }
 
 td {
+    background-color: rgba(252, 252, 252, 0.788);
     text-align: left;
     padding: 15px;
     font-weight: 500;
 }
 
 #casesToday {
+    background-color: rgb(252, 234, 195);
     color: orange;
     font-weight: 650;
 }
 
 #deathsToday {
+    background-color: rgb(252, 195, 195);
     color: red;
     font-weight: 650;
 }
 
+#vaccinated {
+    background-color: rgb(195, 235, 252);
+    color: rgb(12, 21, 145);
+    font-weight: 650;
+}
+
+
 #recovered {
+    background-color: rgb(195, 252, 203);
     color: green;
     font-weight: 650;
 }
@@ -223,7 +240,7 @@ footer {
         width: 300px;
     }
 
-    #country2 {
+    #countryList {
         width: 300px;
     }
 

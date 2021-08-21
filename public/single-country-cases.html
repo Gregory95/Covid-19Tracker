@@ -5,6 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Country Cases</title>
+  <meta name="description" content="You can find information about Covid19 Pandemic for all countries in the world. Most frequent asked
+    questions about Covid-19. See Updated information about any country in the world.">
+  <meta name="keywords" content="covid, covid-19, Country Metter, cases, vaccine, covid cases in usa, quarrantine, stay safe, social distance, corona, corona virus, 
+    covid cyprus, covid cases, virus, pandemic, epidemic, health, world metter, corona virus in cyprus, corona virus cases, covid19 tracker, vaccination, phizer, moderna, astrazeneca, johnson and johson,
+    covid19 vaccine, bill gates">
   <!-- Favicons -->
   <link href="/assets/images/virus.jpeg" rel="icon">
 
@@ -39,25 +44,21 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li><a href="../index.html">Main</a></li>
-          <li class="active"><a href="singleCountryCases.html">Country Metter </a></li>
-          <li><a href="worldMetter.html">World Metter</a></li>
-          <li><a href="information.html">Information</a></li>
-
+          <li class="active"><a href="single-country-cases.html">Country Metter </a></li>
+          <li><a href="world-metter.html">World Metter</a></li>
+          <li><a href="public/travel-alert.html">Travel Alert</a></li>
+          <li><a href="public/vaccine.html">Vaccine</a></li>
+          <li><a href="public/information.html">FAQs</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
 
   <div class="main-page">
-    <h1>Covid-19 Live Data</h1>
-    <span id="liveDateTime">
-      <p id="dateTime"></p>
-    </span>
-    <div class="loader"></div>
     <div id="dropdown" style='text-align:left;'>
       <div id="dropdown-list">
         <script src="/js/countries.js"></script>
-        <select id="country2" name="country2"></select>
+        <select id="countryList" name="countryList"></select>
       </div>
       <div id="dropdown-list">
         <select style="margin-top:2px" id="history" name="history"></select>
@@ -77,16 +78,16 @@
             <td id="totalDeaths"></td>
           </tr>
           <tr>
-            <th>Active cases</th>
-            <td id="activeCases"></td>
-          </tr>
-          <tr>
             <th>Today cases</th>
             <td id="casesToday"></td>
           </tr>
           <tr>
             <th>Today deaths</th>
             <td id="deathsToday"></td>
+          </tr>
+          <tr>
+            <th>Active cases</th>
+            <td id="activeCases"></td>
           </tr>
           <tr>
             <th>Vaccinated</th>
@@ -97,8 +98,24 @@
             <td id="recovered"></td>
           </tr>
           <tr>
+            <th>Cases Per One Million</th>
+            <td id="casesPerOneMillion"></td>
+          </tr>
+          <tr>
+            <th>Deaths Per One Million</th>
+            <td id="deathsPerOneMillion"></td>
+          </tr>
+          <tr>
+            <th>Tests Per One Million</th>
+            <td id="testsPerOneMillion"></td>
+          </tr>
+          <tr>
             <th>Tests</th>
             <td id="tests"></td>
+          </tr>
+          <tr>
+            <th>Population</th>
+            <td id="population"></td>
           </tr>
           <tr>
             <th>Last updated</th>
@@ -146,20 +163,10 @@
 <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="/vendor/aos/aos.js"></script>
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/8.9.1/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/8.9.1/firebase-analytics.js"></script>
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-
 <!-- Template Main JS File -->
 <script src="/js/main.js"></script>
 <script>
-  populateCountries("country2");
+  populateCountries("countryList");
   populateHistoryOptions("history");
 </script>
 

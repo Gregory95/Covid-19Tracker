@@ -21,7 +21,7 @@ var counter = 0;
 document.getElementById("content-left").style.display = "none";
 
 document.getElementById("runApi").onclick = function setup() {
-
+    $('.loader').show();
     document.getElementById("content-left").style.display = "flex";
     getCountryData()
     getVaccineData()
@@ -29,6 +29,15 @@ document.getElementById("runApi").onclick = function setup() {
 
 window.onload = () => {
     geoFindMe();
+
+    document.getElementById('countryList').value = 'All';
+    getCountryData();
+    getVaccineData();
+}
+
+function sleep(mills) {
+    var t = new Date().getTime(); // Store current Time;
+    while ((new Date().getTime() - t) < mills);
 }
 
 // Initialize and add the map
@@ -76,7 +85,7 @@ function reverseGeocodingWithGoogle(latitude, longitude) {
 //a functio that returnes information about vaccines completed in each country
 const getVaccineData = () => {
     let url = "";
-    let country = document.getElementById("country2").value.trim();
+    let country = document.getElementById("countryList").value.trim();
     if (country === "United Kingdom") country = 'UK';
     var vacData = `${baseEndpoint}/${getVaccineDataForEachCountry}/${country}`;
     var vacDataWorldWide = `${baseEndpoint}/${getWorldVaccinations}`;
@@ -155,7 +164,7 @@ const getCountryData = () => {
     let url = "";
     var img_url = new Image();
 
-    let country = document.getElementById("country2").value.trim();
+    let country = document.getElementById("countryList").value.trim();
     let days = document.getElementById("history").value.trim();
 
     if (country === "United Kingdom") country = 'UK';
@@ -380,6 +389,10 @@ const addCountryToHtml = (country) => {
     document.getElementById("totalDeaths").innerHTML = country.deaths.toLocaleString();
     document.getElementById("deathsToday").innerHTML = "+" + country.todayDeaths.toLocaleString();
     document.getElementById("casesToday").innerHTML = "+" + country.todayCases.toLocaleString();
+    document.getElementById("testsPerOneMillion").innerHTML = country.testsPerOneMillion.toLocaleString();
+    document.getElementById("casesPerOneMillion").innerHTML = country.casesPerOneMillion.toLocaleString();
+    document.getElementById("deathsPerOneMillion").innerHTML = country.deathsPerOneMillion.toLocaleString();
+    document.getElementById("population").innerHTML = country.population.toLocaleString();
     document.getElementById("tests").innerHTML = country.tests.toLocaleString();
     document.getElementById("updateTime").innerHTML = convertLastUpdatedToNormalizedDate(country.updated);
 
@@ -418,6 +431,10 @@ const clearTable = () => {
     document.getElementById("recovered").innerHTML = "";
     document.getElementById("deathsToday").innerHTML = "";
     document.getElementById("casesToday").innerHTML = "";
+    document.getElementById("testsPerOneMillion").innerHTML = "";
+    document.getElementById("casesPerOneMillion").innerHTML = "";
+    document.getElementById("deathsPerOneMillion").innerHTML = "";
+    document.getElementById("population").innerHTML = "";
     document.getElementById("tests").innerHTML = "";
     document.getElementById("updateTime").innerHTML = "";
 }
