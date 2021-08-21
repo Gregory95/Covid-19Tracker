@@ -29,10 +29,6 @@ document.getElementById("runApi").onclick = function setup() {
 
 window.onload = () => {
     geoFindMe();
-
-    document.getElementById('countryList').value = 'All';
-    getCountryData();
-    getVaccineData();
 }
 
 function sleep(mills) {

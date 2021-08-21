@@ -10,7 +10,7 @@ function startTime() {
   var s = today.getSeconds();
   m = checkTime(m);
   s = checkTime(s);
-  var dateTime = date + ' ' + h + ":" + m + ":" + s
+  var dateTime = date + ' ' + h + ":" + m + ":" + s;
   document.getElementById("dateTime").innerHTML = dateTime;
   var t = setTimeout(startTime, 500);
 }
