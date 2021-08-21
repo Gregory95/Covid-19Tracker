@@ -440,7 +440,6 @@ h6 {
   position: relative;
   background: url("../assets/hero-bg.jpg") top center;
   background-size: cover;
-  position: relative;
 }
 
 #hero:before {
