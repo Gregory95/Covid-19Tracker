@@ -228,9 +228,10 @@ footer {
 @media screen and (max-width: 918px) {
 
     #dropdown {
-        margin-top: 5em;
-        margin-left: 1em;
+        margin-top: 1em;
+        margin-left: 0.5em;
         width: 300px;
+        margin-right: 1em;
     }
 
     #history {
@@ -246,10 +247,6 @@ footer {
         margin-top: 10px;
     }
 
-    #content-left {
-        width: 85%;
-    }
-
     table {
         width: 100%;
         margin-bottom: 25px;
@@ -259,6 +256,10 @@ footer {
         width: 100%;
         margin-right: 1px;
         margin-left: 1px;
+    }
+
+    #content-left {
+        width: 90%;
     }
 
     #map {

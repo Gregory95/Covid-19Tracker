@@ -23,8 +23,7 @@ document.getElementById("content-left").style.display = "none";
 document.getElementById("runApi").onclick = function setup() {
     $('.loader').show();
     document.getElementById("content-left").style.display = "flex";
-    getCountryData()
-    getVaccineData()
+    getCountryData();
 };
 
 window.onload = () => {
@@ -93,6 +92,7 @@ const getVaccineData = () => {
         clearTable();
         alert("\n" + "Please select a country!");
         document.getElementById("content-left").style.display = "none";
+        return;
     } else {
         url = vacData;
         document.getElementById("history").disabled = false;
@@ -175,6 +175,7 @@ const getCountryData = () => {
         clearTable();
         alert("\n" + "Please select a country!");
         document.getElementById("content-left").style.display = "none";
+        return;
     } else {
         url = singleCountryUrl;
         document.getElementById("history").disabled = false;
@@ -201,6 +202,7 @@ const getCountryData = () => {
 
             counter++;
 
+            getVaccineData();
         }).catch((err) => {
             console.error(err);
             clearTable();
