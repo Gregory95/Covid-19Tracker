@@ -10,7 +10,7 @@ const getVaccineDataForEachCountry = 'vaccine/coverage/countries';
 const getWorldVaccinations = 'vaccine/coverage';
 const getHOpkinsCSSE = 'jhucsse';
 const getHistory = 'historical'; //v2/historical/:country get history of specific country
-const getCountriesLatitudes = 'https://corona.lmao.ninja/v2/jhucsse';
+// const getCountriesLatitudes = 'https://corona.lmao.ninja/v2/jhucsse';
 const openCageKey = '44229c16f0a44ceeb93cf52c78233b82';
 
 
@@ -190,7 +190,7 @@ const getCountryData = () => {
         })
         .then((result) => {
             if (country === 'UK') country = 'United Kingdom';
-            getCountriesLatAndLong(country);
+            //getCountriesLatAndLong(country);
             /*Left content of the page*/
             // document.getElementById("flag").style.display = "none";
 
